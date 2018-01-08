@@ -18,8 +18,9 @@ const sketch = (p5) => {
 
   // make library globally available
   window.p5 = p5;
-
- 
+  window.Trains = [];
+  window.Tracks = []
+  var train = new Train(1, 'S', 5, {x: 100, y: 0});
 
 
   // Setup function

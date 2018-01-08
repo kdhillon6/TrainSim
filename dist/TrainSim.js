@@ -86786,7 +86786,6 @@ class train {
       p5.fill(_constants.trainColor);
       p5.rect(this.pos.x, this.pos.y, _constants.trainLength, _constants.trainWidth, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius);
       for (let x = this.pos.x + 40; x < this.pos.x + _constants.trainLength; x += 40) {
-        console.log(x);
         p5.strokeWeight(2);
         p5.stroke(_constants.trainCompartmentColor);
         p5.line(x, this.pos.y, x, this.pos.y + _constants.trainWidth);
@@ -86796,23 +86795,32 @@ class train {
       p5.fill(_constants.trainColor);
       p5.rect(this.pos.x - _constants.trainLength, this.pos.y, _constants.trainLength, _constants.trainWidth, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius);
       for (let x = this.pos.x - _constants.trainLength + 40; x < this.pos.x; x += 40) {
-        console.log(x);
         p5.strokeWeight(2);
         p5.stroke(_constants.trainCompartmentColor);
         p5.line(x, this.pos.y, x, this.pos.y + _constants.trainWidth);
+      }
+    } else if (this.direction == 'S') {
+      p5.strokeWeight(1);
+      p5.fill(_constants.trainColor);
+      p5.rect(this.pos.x, this.pos.y, _constants.trainWidth, _constants.trainLength, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius);
+      for (let y = this.pos.y + 40; y < this.pos.y + _constants.trainLength; y += 40) {
+        p5.strokeWeight(2);
+        p5.stroke(_constants.trainCompartmentColor);
+        p5.line(this.pos.x, y, this.pos.x + _constants.trainWidth, y);
       }
     } else if (this.direction == 'N') {
       p5.strokeWeight(1);
       p5.fill(_constants.trainColor);
-      p5.rect(this.pos.x, this.pos.y, _constants.trainWidth, _constants.trainLength, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius);
-      for (let x = this.pos.x - _constants.trainLength + 40; x < this.pos.x; x += 40) {
-        console.log(x);
+      p5.rect(this.pos.x, this.pos.y - _constants.trainLength, _constants.trainWidth, _constants.trainLength, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius);
+      for (let y = this.pos.y - _constants.trainLength + 40; y < this.pos.y; y += 40) {
         p5.strokeWeight(2);
         p5.stroke(_constants.trainCompartmentColor);
-        p5.line(x, this.pos.y, x, this.pos.y + _constants.trainWidth);
+        p5.line(this.pos.x, y, this.pos.x + _constants.trainWidth, y);
       }
     }
   }
+
+  update() {}
 
 }
 exports.default = train;
@@ -86856,6 +86864,9 @@ const sketch = p5 => {
 
   // make library globally available
   window.p5 = p5;
+  window.Trains = [];
+  window.Tracks = [];
+  var train = new _train2.default(1, 'S', 5, { x: 100, y: 0 });
 
   // Setup function
   p5.setup = () => {

@@ -2,6 +2,7 @@ import p5 from 'p5';
 import 'p5/lib/addons/p5.sound';
 import 'p5/lib/addons/p5.dom';
 import * as constants from './constants';
+import Track from './components/track';
 
 import Train from './components/train';
 
@@ -14,6 +15,8 @@ const sketch = (p5) => {
 
   // make library globally available
   window.p5 = p5;
+
+  var track= new Track;
 
   // Setup function
   p5.setup = () => {

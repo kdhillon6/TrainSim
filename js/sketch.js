@@ -1,13 +1,14 @@
 import p5 from 'p5';
 import 'p5/lib/addons/p5.sound';
 import 'p5/lib/addons/p5.dom';
+import * as constants from './constants';
 
 // Sketch scope
 const sketch = (p5) => {
 
   // Variables scoped within p5
-  const canvasWidth = p5.windowWidth;
-  const canvasHeight = p5.windowHeight;
+  const canvasWidth = constants.width;
+  const canvasHeight = constants.height;
 
   // make library globally available
   window.p5 = p5;

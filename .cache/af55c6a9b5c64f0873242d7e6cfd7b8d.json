@@ -1,0 +1,1 @@
+{"dependencies":[],"generated":{"js":"\"use strict\";\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nconst width = exports.width = 1000;\nconst height = exports.height = 800;"},"hash":"7cd7ba0882c46308271d584de76678a4"}

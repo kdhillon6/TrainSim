@@ -4,9 +4,12 @@ import 'p5/lib/addons/p5.dom';
 import * as constants from './constants';
 
 import Train from './components/train';
+import { width } from './constants';
 
 // Sketch scope
 const sketch = (p5) => {
+
+
 
   // Variables scoped within p5
   const canvasWidth = constants.width;
@@ -15,16 +18,24 @@ const sketch = (p5) => {
   // make library globally available
   window.p5 = p5;
 
+  //Varibles 
+  var train= new Train(1, 'W', 10, {x:width, y:100});
+
+
   // Setup function
   p5.setup = () => {
     let canvas = p5.createCanvas(canvasWidth, canvasHeight);
     p5.frameRate(10);
 
+    
+    
     // Your stuff goes in here
   }
 
   // Draw function
   p5.draw = () => {
+    p5.background('yellow');
+    train.show();
   }
 }
 

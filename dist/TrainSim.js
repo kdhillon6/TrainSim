@@ -69,7 +69,7 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({10:[function(require,module,exports) {
+})({14:[function(require,module,exports) {
 'use strict'
 
 exports.byteLength = byteLength
@@ -185,7 +185,7 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
-},{}],11:[function(require,module,exports) {
+},{}],13:[function(require,module,exports) {
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = nBytes * 8 - mLen - 1
@@ -278,7 +278,7 @@ module.exports = Array.isArray || function (arr) {
   return toString.call(arr) == '[object Array]';
 };
 
-},{}],8:[function(require,module,exports) {
+},{}],10:[function(require,module,exports) {
 
 var global = (1,eval)("this");
 /*!
@@ -2071,7 +2071,7 @@ function isnan (val) {
   return val !== val // eslint-disable-line no-self-compare
 }
 
-},{"base64-js":10,"ieee754":11,"isarray":12,"buffer":8}],9:[function(require,module,exports) {
+},{"base64-js":14,"ieee754":13,"isarray":12,"buffer":10}],11:[function(require,module,exports) {
 
 // shim for using process in browser
 var process = module.exports = {};
@@ -2258,7 +2258,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],6:[function(require,module,exports) {
+},{}],7:[function(require,module,exports) {
 var global = (1,eval)("this");
 var Buffer = require("buffer").Buffer;
 var process = require("process");
@@ -73668,7 +73668,7 @@ module.exports = p5;
 
 },{"../core/core":55,"./p5.Geometry":102}]},{},[46])(46)
 });
-},{"buffer":8,"process":9}],13:[function(require,module,exports) {
+},{"buffer":10,"process":11}],9:[function(require,module,exports) {
 /*! p5.sound.js v0.3.5 2017-07-28 */
 /**
  *  p5.sound extends p5 with <a href="http://caniuse.com/audio-api"
@@ -84190,7 +84190,7 @@ src_app = function () {
 }(sndcore, master, helpers, errorHandler, panner, soundfile, amplitude, fft, signal, oscillator, env, pulse, noise, audioin, filter, delay, reverb, metro, looper, compressor, soundRecorder, peakdetect, gain, distortion);
 }));
 
-},{"../p5":6}],14:[function(require,module,exports) {
+},{"../p5":7}],8:[function(require,module,exports) {
 /*! p5.dom.js v0.3.4 Aug 11, 2017 */
 /**
  * <p>The web is much more than just canvas and p5.dom makes it easy to interact
@@ -86728,7 +86728,7 @@ src_app = function () {
 
 }));
 
-},{"../p5":6}],15:[function(require,module,exports) {
+},{"../p5":7}],17:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -86736,11 +86736,14 @@ Object.defineProperty(exports, "__esModule", {
 });
 const width = exports.width = 1000;
 const height = exports.height = 800;
-const trainLength = exports.trainLength = 120;
+
+//Train chracterstics
+const trainLength = exports.trainLength = 160;
 const trainWidth = exports.trainWidth = 40;
 const trainOuterRadius = exports.trainOuterRadius = 3;
 const trainColor = exports.trainColor = "#023F4D";
-},{}],16:[function(require,module,exports) {
+const trainCompartmentColor = exports.trainCompartmentColor = "white";
+},{}],18:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -86749,27 +86752,42 @@ Object.defineProperty(exports, "__esModule", {
 
 var _constants = require("../constants");
 
-var constants = _interopRequireWildcard(_constants);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
 class train {
-  constructor(id, direction, x, y, speed, track) {
+  constructor(id, direction, speed, track) {
     this.id = id;
     this.direction = direction;
-    this.pos = { x: x, y: y };
+    this.pos = { x: track.x, y: track.y };
     this.speed = speed;
     this.track = track;
   }
 
   show() {
-    p5.fill(_constants.trainColor);
-    p5.rect(this.pos.x, this.pos.y, _constants.trainLength, _constants.trainWidth, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius);
+    if (this.direction == 'E') {
+      p5.strokeWeight(1);
+      p5.fill(_constants.trainColor);
+      p5.rect(this.pos.x, this.pos.y, _constants.trainLength, _constants.trainWidth, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius);
+      for (let x = this.pos.x + 40; x < this.pos.x + _constants.trainLength; x += 40) {
+        console.log(x);
+        p5.strokeWeight(2);
+        p5.stroke(_constants.trainCompartmentColor);
+        p5.line(x, this.pos.y, x, this.pos.y + _constants.trainWidth);
+      }
+    } else if (this.direction == 'W') {
+      p5.strokeWeight(1);
+      p5.fill(_constants.trainColor);
+      p5.rect(this.pos.x - _constants.trainLength, this.pos.y, _constants.trainLength, _constants.trainWidth, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius);
+      for (let x = this.pos.x - _constants.trainLength + 40; x < this.pos.x; x += 40) {
+        console.log(x);
+        p5.strokeWeight(2);
+        p5.stroke(_constants.trainCompartmentColor);
+        p5.line(x, this.pos.y, x, this.pos.y + _constants.trainWidth);
+      }
+    }
   }
 
 }
 exports.default = train;
-},{"../constants":15}],3:[function(require,module,exports) {
+},{"../constants":17}],6:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -86806,6 +86824,9 @@ const sketch = p5 => {
   // make library globally available
   window.p5 = p5;
 
+  //Varibles 
+  var train = new _train2.default(1, 'W', 10, { x: _constants.width, y: 100 });
+
   // Setup function
   p5.setup = () => {
     let canvas = p5.createCanvas(canvasWidth, canvasHeight);
@@ -86815,11 +86836,14 @@ const sketch = p5 => {
   };
 
   // Draw function
-  p5.draw = () => {};
+  p5.draw = () => {
+    p5.background('yellow');
+    train.show();
+  };
 };
 
 exports.default = sketch;
-},{"p5":6,"p5/lib/addons/p5.sound":13,"p5/lib/addons/p5.dom":14,"./constants":15,"./components/train":16}],7:[function(require,module,exports) {
+},{"p5":7,"p5/lib/addons/p5.sound":9,"p5/lib/addons/p5.dom":8,"./constants":17,"./components/train":18}],16:[function(require,module,exports) {
 var bundleURL = null;
 function getBundleURLCached() {
   if (!bundleURL) {
@@ -86850,7 +86874,7 @@ function getBaseURL(url) {
 exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
 
-},{}],5:[function(require,module,exports) {
+},{}],15:[function(require,module,exports) {
 var bundle = require('./bundle-url');
 
 function updateLink(link) {
@@ -86882,13 +86906,13 @@ function reloadCSS() {
 
 module.exports = reloadCSS;
 
-},{"./bundle-url":7}],4:[function(require,module,exports) {
+},{"./bundle-url":16}],5:[function(require,module,exports) {
 
         var reloadCSS = require('_css_loader');
         module.hot.dispose(reloadCSS);
         module.hot.accept(reloadCSS);
       
-},{"_css_loader":5}],2:[function(require,module,exports) {
+},{"_css_loader":15}],4:[function(require,module,exports) {
 "use strict";
 
 var _p = require("p5");
@@ -86905,7 +86929,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // Initialize sketch
 new _p2.default(_sketch2.default);
-},{"p5":6,"./js/sketch":3,"./styles/main.css":4}],0:[function(require,module,exports) {
+},{"p5":7,"./js/sketch":6,"./styles/main.css":5}],0:[function(require,module,exports) {
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
 function Module() {
@@ -86923,7 +86947,7 @@ function Module() {
 module.bundle.Module = Module;
 
 if (!module.bundle.parent && typeof WebSocket !== 'undefined') {
-  var ws = new WebSocket('ws://' + window.location.hostname + ':50514/');
+  var ws = new WebSocket('ws://' + window.location.hostname + ':58326/');
   ws.onmessage = function(event) {
     var data = JSON.parse(event.data);
 
@@ -87024,4 +87048,4 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id)
   });
 }
-},{}]},{},[0,2])
+},{}]},{},[0,4])

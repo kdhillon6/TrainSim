@@ -6,6 +6,8 @@ import {Track} from './components/createTrack';
 import Train from './components/train';
 import { width } from './constants';
 
+import { createTrain } from './components/createTrain';
+
 // Sketch scope
 const sketch = (p5) => {
 
@@ -17,18 +19,14 @@ const sketch = (p5) => {
 
   // make library globally available
   window.p5 = p5;
-
-
-  var track= new Track;
-
-  //Varibles 
-  var train= new Train(1, 'W', 10, {x:width, y:100});
+  window.Trains = [];
+  window.Tracks = []
+  var train = new Train(1, 'S', 5, {x: 100, y: 0});
 
   // Setup function
   p5.setup = () => {
     let canvas = p5.createCanvas(canvasWidth, canvasHeight);
     p5.frameRate(10);
-    
     // Your stuff goes in here
   }
 

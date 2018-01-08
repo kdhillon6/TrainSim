@@ -69,7 +69,7 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({12:[function(require,module,exports) {
+})({14:[function(require,module,exports) {
 'use strict'
 
 exports.byteLength = byteLength
@@ -271,7 +271,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],14:[function(require,module,exports) {
+},{}],12:[function(require,module,exports) {
 var toString = {}.toString;
 
 module.exports = Array.isArray || function (arr) {
@@ -2071,7 +2071,7 @@ function isnan (val) {
   return val !== val // eslint-disable-line no-self-compare
 }
 
-},{"base64-js":12,"ieee754":13,"isarray":14,"buffer":10}],11:[function(require,module,exports) {
+},{"base64-js":14,"ieee754":13,"isarray":12,"buffer":10}],11:[function(require,module,exports) {
 
 // shim for using process in browser
 var process = module.exports = {};
@@ -86807,27 +86807,89 @@ Object.defineProperty(exports, "__esModule", {
 
 var _constants = require("../constants");
 
-var constants = _interopRequireWildcard(_constants);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
 class train {
-  constructor(id, direction, x, y, speed, track) {
+  constructor(id, direction, speed, track) {
     this.id = id;
     this.direction = direction;
-    this.pos = { x: x, y: y };
+    this.pos = { x: track.x, y: track.y };
     this.speed = speed;
     this.track = track;
   }
 
   show() {
-    p5.fill(_constants.trainColor);
-    p5.rect(this.pos.x, this.pos.y, _constants.trainLength, _constants.trainWidth, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius);
+    if (this.direction == 'E') {
+      p5.strokeWeight(1);
+      p5.fill(_constants.trainColor);
+      p5.rect(this.pos.x, this.pos.y, _constants.trainLength, _constants.trainWidth, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius);
+      for (let x = this.pos.x + 40; x < this.pos.x + _constants.trainLength; x += 40) {
+        p5.strokeWeight(2);
+        p5.stroke(_constants.trainCompartmentColor);
+        p5.line(x, this.pos.y, x, this.pos.y + _constants.trainWidth);
+      }
+    } else if (this.direction == 'W') {
+      p5.strokeWeight(1);
+      p5.fill(_constants.trainColor);
+      p5.rect(this.pos.x - _constants.trainLength, this.pos.y, _constants.trainLength, _constants.trainWidth, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius);
+      for (let x = this.pos.x - _constants.trainLength + 40; x < this.pos.x; x += 40) {
+        p5.strokeWeight(2);
+        p5.stroke(_constants.trainCompartmentColor);
+        p5.line(x, this.pos.y, x, this.pos.y + _constants.trainWidth);
+      }
+    } else if (this.direction == 'S') {
+      p5.strokeWeight(1);
+      p5.fill(_constants.trainColor);
+      p5.rect(this.pos.x, this.pos.y, _constants.trainWidth, _constants.trainLength, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius);
+      for (let y = this.pos.y + 40; y < this.pos.y + _constants.trainLength; y += 40) {
+        p5.strokeWeight(2);
+        p5.stroke(_constants.trainCompartmentColor);
+        p5.line(this.pos.x, y, this.pos.x + _constants.trainWidth, y);
+      }
+    } else if (this.direction == 'N') {
+      p5.strokeWeight(1);
+      p5.fill(_constants.trainColor);
+      p5.rect(this.pos.x, this.pos.y - _constants.trainLength, _constants.trainWidth, _constants.trainLength, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius);
+      for (let y = this.pos.y - _constants.trainLength + 40; y < this.pos.y; y += 40) {
+        p5.strokeWeight(2);
+        p5.stroke(_constants.trainCompartmentColor);
+        p5.line(this.pos.x, y, this.pos.x + _constants.trainWidth, y);
+      }
+    }
   }
+
+  update() {}
 
 }
 exports.default = train;
-},{"../constants":17}],6:[function(require,module,exports) {
+},{"../constants":17}],20:[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _train = require("./train");
+
+var _train2 = _interopRequireDefault(_train);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+createTrain = () => {
+  var txt = loadString("../txt/train.txt");
+  var trains = split(txt, '\n');
+  console.log(trains);
+  //get each track
+  for (var i = 0; i < tracks.length(); i++) {
+    parseTrackData(tracks[i]);
+  }
+};
+
+parseTrackData = (train, i) => {
+  //get each track info
+  trackData = split(train, ' ');
+};
+
+exports.default = createTrain;
+},{"./train":18}],6:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -86852,6 +86914,8 @@ var _train = require("./components/train");
 
 var _train2 = _interopRequireDefault(_train);
 
+var _createTrain = require("./components/createTrain");
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -86865,16 +86929,24 @@ const sketch = p5 => {
 
   // make library globally available
   window.p5 = p5;
+<<<<<<< HEAD
 
   var track = new _createTrack.Track();
 
   //Varibles 
   var train = new _train2.default(1, 'W', 10, { x: _constants.width, y: 100 });
+=======
+  window.Trains = [];
+  window.Tracks = [];
+  var train = new _train2.default(1, 'S', 5, { x: 100, y: 0 });
+>>>>>>> b69eb570a9244c790090fd42c71cb900e470ccc7
 
   // Setup function
   p5.setup = () => {
     let canvas = p5.createCanvas(canvasWidth, canvasHeight);
     p5.frameRate(10);
+
+    (0, _createTrain.createTrain)();
 
     // Your stuff goes in here
   };
@@ -86893,7 +86965,11 @@ var createTrack = () => {
 };
 
 exports.default = sketch;
+<<<<<<< HEAD
 },{"p5":7,"p5/lib/addons/p5.sound":9,"p5/lib/addons/p5.dom":8,"./constants":17,"./components/createTrack":20,"./components/train":18}],16:[function(require,module,exports) {
+=======
+},{"p5":7,"p5/lib/addons/p5.sound":9,"p5/lib/addons/p5.dom":8,"./constants":17,"./components/track":19,"./components/train":18,"./components/createTrain":20}],16:[function(require,module,exports) {
+>>>>>>> b69eb570a9244c790090fd42c71cb900e470ccc7
 var bundleURL = null;
 function getBundleURLCached() {
   if (!bundleURL) {
@@ -86997,7 +87073,7 @@ function Module() {
 module.bundle.Module = Module;
 
 if (!module.bundle.parent && typeof WebSocket !== 'undefined') {
-  var ws = new WebSocket('ws://' + window.location.hostname + ':50170/');
+  var ws = new WebSocket('ws://' + window.location.hostname + ':58326/');
   ws.onmessage = function(event) {
     var data = JSON.parse(event.data);
 

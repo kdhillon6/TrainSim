@@ -69,7 +69,7 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({14:[function(require,module,exports) {
+})({12:[function(require,module,exports) {
 'use strict'
 
 exports.byteLength = byteLength
@@ -271,7 +271,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],12:[function(require,module,exports) {
+},{}],14:[function(require,module,exports) {
 var toString = {}.toString;
 
 module.exports = Array.isArray || function (arr) {
@@ -2071,11 +2071,7 @@ function isnan (val) {
   return val !== val // eslint-disable-line no-self-compare
 }
 
-<<<<<<< HEAD
-},{"base64-js":11,"ieee754":10,"isarray":12,"buffer":8}],9:[function(require,module,exports) {
-=======
-},{"base64-js":14,"ieee754":13,"isarray":12,"buffer":10}],11:[function(require,module,exports) {
->>>>>>> 991e7dafffcfe7cf33454d5906e648d57e45ccd1
+},{"base64-js":12,"ieee754":13,"isarray":14,"buffer":10}],11:[function(require,module,exports) {
 
 // shim for using process in browser
 var process = module.exports = {};
@@ -86746,8 +86742,8 @@ const trainLength = exports.trainLength = 160;
 const trainWidth = exports.trainWidth = 40;
 const trainOuterRadius = exports.trainOuterRadius = 3;
 const trainColor = exports.trainColor = "#023F4D";
-<<<<<<< HEAD
-},{}],17:[function(require,module,exports) {
+const trainCompartmentColor = exports.trainCompartmentColor = "white";
+},{}],19:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -86766,11 +86762,7 @@ class track {
 }
 
 exports.default = track;
-},{}],16:[function(require,module,exports) {
-=======
-const trainCompartmentColor = exports.trainCompartmentColor = "white";
 },{}],18:[function(require,module,exports) {
->>>>>>> 991e7dafffcfe7cf33454d5906e648d57e45ccd1
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -86779,46 +86771,27 @@ Object.defineProperty(exports, "__esModule", {
 
 var _constants = require("../constants");
 
+var constants = _interopRequireWildcard(_constants);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 class train {
-  constructor(id, direction, speed, track) {
+  constructor(id, direction, x, y, speed, track) {
     this.id = id;
     this.direction = direction;
-    this.pos = { x: track.x, y: track.y };
+    this.pos = { x: x, y: y };
     this.speed = speed;
     this.track = track;
   }
 
   show() {
-    if (this.direction == 'E') {
-      p5.strokeWeight(1);
-      p5.fill(_constants.trainColor);
-      p5.rect(this.pos.x, this.pos.y, _constants.trainLength, _constants.trainWidth, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius);
-      for (let x = this.pos.x + 40; x < this.pos.x + _constants.trainLength; x += 40) {
-        console.log(x);
-        p5.strokeWeight(2);
-        p5.stroke(_constants.trainCompartmentColor);
-        p5.line(x, this.pos.y, x, this.pos.y + _constants.trainWidth);
-      }
-    } else if (this.direction == 'W') {
-      p5.strokeWeight(1);
-      p5.fill(_constants.trainColor);
-      p5.rect(this.pos.x - _constants.trainLength, this.pos.y, _constants.trainLength, _constants.trainWidth, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius);
-      for (let x = this.pos.x - _constants.trainLength + 40; x < this.pos.x; x += 40) {
-        console.log(x);
-        p5.strokeWeight(2);
-        p5.stroke(_constants.trainCompartmentColor);
-        p5.line(x, this.pos.y, x, this.pos.y + _constants.trainWidth);
-      }
-    }
+    p5.fill(_constants.trainColor);
+    p5.rect(this.pos.x, this.pos.y, _constants.trainLength, _constants.trainWidth, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius);
   }
 
 }
 exports.default = train;
-<<<<<<< HEAD
-},{"../constants":15}],4:[function(require,module,exports) {
-=======
 },{"../constants":17}],6:[function(require,module,exports) {
->>>>>>> 991e7dafffcfe7cf33454d5906e648d57e45ccd1
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -86859,12 +86832,10 @@ const sketch = p5 => {
   // make library globally available
   window.p5 = p5;
 
-<<<<<<< HEAD
   var track = new _track2.default();
-=======
+
   //Varibles 
   var train = new _train2.default(1, 'W', 10, { x: _constants.width, y: 100 });
->>>>>>> 991e7dafffcfe7cf33454d5906e648d57e45ccd1
 
   // Setup function
   p5.setup = () => {
@@ -86882,11 +86853,7 @@ const sketch = p5 => {
 };
 
 exports.default = sketch;
-<<<<<<< HEAD
-},{"p5":6,"p5/lib/addons/p5.sound":13,"p5/lib/addons/p5.dom":14,"./constants":15,"./components/track":17,"./components/train":16}],7:[function(require,module,exports) {
-=======
-},{"p5":7,"p5/lib/addons/p5.sound":9,"p5/lib/addons/p5.dom":8,"./constants":17,"./components/train":18}],16:[function(require,module,exports) {
->>>>>>> 991e7dafffcfe7cf33454d5906e648d57e45ccd1
+},{"p5":7,"p5/lib/addons/p5.sound":9,"p5/lib/addons/p5.dom":8,"./constants":17,"./components/track":19,"./components/train":18}],16:[function(require,module,exports) {
 var bundleURL = null;
 function getBundleURLCached() {
   if (!bundleURL) {
@@ -86949,11 +86916,7 @@ function reloadCSS() {
 
 module.exports = reloadCSS;
 
-<<<<<<< HEAD
-},{"./bundle-url":7}],3:[function(require,module,exports) {
-=======
 },{"./bundle-url":16}],5:[function(require,module,exports) {
->>>>>>> 991e7dafffcfe7cf33454d5906e648d57e45ccd1
 
         var reloadCSS = require('_css_loader');
         module.hot.dispose(reloadCSS);
@@ -86976,11 +86939,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // Initialize sketch
 new _p2.default(_sketch2.default);
-<<<<<<< HEAD
-},{"p5":6,"./js/sketch":4,"./styles/main.css":3}],0:[function(require,module,exports) {
-=======
 },{"p5":7,"./js/sketch":6,"./styles/main.css":5}],0:[function(require,module,exports) {
->>>>>>> 991e7dafffcfe7cf33454d5906e648d57e45ccd1
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
 function Module() {
@@ -86998,11 +86957,7 @@ function Module() {
 module.bundle.Module = Module;
 
 if (!module.bundle.parent && typeof WebSocket !== 'undefined') {
-<<<<<<< HEAD
-  var ws = new WebSocket('ws://' + window.location.hostname + ':50363/');
-=======
-  var ws = new WebSocket('ws://' + window.location.hostname + ':58326/');
->>>>>>> 991e7dafffcfe7cf33454d5906e648d57e45ccd1
+  var ws = new WebSocket('ws://' + window.location.hostname + ':50170/');
   ws.onmessage = function(event) {
     var data = JSON.parse(event.data);
 
@@ -87103,8 +87058,4 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id)
   });
 }
-<<<<<<< HEAD
-},{}]},{},[0,2])0,4])
-=======
 },{}]},{},[0,4])
->>>>>>> 991e7dafffcfe7cf33454d5906e648d57e45ccd1

@@ -19,13 +19,12 @@ const sketch = (p5) => {
   // make library globally available
   window.p5 = p5;
 
-<<<<<<< HEAD
+
   var track= new Track;
-=======
+
   //Varibles 
   var train= new Train(1, 'W', 10, {x:width, y:100});
 
->>>>>>> 991e7dafffcfe7cf33454d5906e648d57e45ccd1
 
   // Setup function
   p5.setup = () => {

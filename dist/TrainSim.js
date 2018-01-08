@@ -86743,6 +86743,25 @@ const trainWidth = exports.trainWidth = 40;
 const trainOuterRadius = exports.trainOuterRadius = 3;
 const trainColor = exports.trainColor = "#023F4D";
 const trainCompartmentColor = exports.trainCompartmentColor = "white";
+},{}],19:[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+class track {
+  constructor(id, direction, x, y) {
+    this.id = id;
+    this.direction = direction;
+    this.x = x;
+    this.y = y;
+  }
+  show() {
+    rect(x, y, x + trackSize, y + trackSize);
+  }
+}
+
+exports.default = track;
 },{}],18:[function(require,module,exports) {
 "use strict";
 
@@ -86816,6 +86835,10 @@ var _constants = require("./constants");
 
 var constants = _interopRequireWildcard(_constants);
 
+var _track = require("./components/track");
+
+var _track2 = _interopRequireDefault(_track);
+
 var _train = require("./components/train");
 
 var _train2 = _interopRequireDefault(_train);
@@ -86850,7 +86873,7 @@ const sketch = p5 => {
 };
 
 exports.default = sketch;
-},{"p5":7,"p5/lib/addons/p5.sound":9,"p5/lib/addons/p5.dom":8,"./constants":17,"./components/train":18}],16:[function(require,module,exports) {
+},{"p5":7,"p5/lib/addons/p5.sound":9,"p5/lib/addons/p5.dom":8,"./constants":17,"./components/track":19,"./components/train":18}],16:[function(require,module,exports) {
 var bundleURL = null;
 function getBundleURLCached() {
   if (!bundleURL) {

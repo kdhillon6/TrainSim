@@ -2,6 +2,7 @@ import p5 from 'p5';
 import 'p5/lib/addons/p5.sound';
 import 'p5/lib/addons/p5.dom';
 import * as constants from './constants';
+import Track from './components/track';
 
 import Train from './components/train';
 import { width } from './constants';

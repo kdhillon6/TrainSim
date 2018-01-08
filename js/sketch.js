@@ -18,8 +18,7 @@ const sketch = (p5) => {
   // make library globally available
   window.p5 = p5;
 
-  //Varibles 
-  var train= new Train(1, 'W', 10, {x:width, y:100});
+ 
 
 
   // Setup function

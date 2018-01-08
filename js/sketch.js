@@ -3,6 +3,8 @@ import 'p5/lib/addons/p5.sound';
 import 'p5/lib/addons/p5.dom';
 import * as constants from './constants';
 
+import Train from './components/train';
+
 // Sketch scope
 const sketch = (p5) => {
 
@@ -23,8 +25,6 @@ const sketch = (p5) => {
 
   // Draw function
   p5.draw = () => {
-    p5.background("yellow");
-    p5.ellipse(50, 50, 80, 80);
   }
 }
 

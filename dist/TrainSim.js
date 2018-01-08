@@ -86824,7 +86824,36 @@ class train {
 
 }
 exports.default = train;
-},{"../constants":17}],6:[function(require,module,exports) {
+},{"../constants":17}],20:[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _train = require("./train");
+
+var _train2 = _interopRequireDefault(_train);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+createTrain = () => {
+  var txt = loadString("../txt/train.txt");
+  var trains = split(txt, '\n');
+  console.log(trains);
+  //get each track
+  for (var i = 0; i < tracks.length(); i++) {
+    parseTrackData(tracks[i]);
+  }
+};
+
+parseTrackData = (train, i) => {
+  //get each track info
+  trackData = split(train, ' ');
+};
+
+exports.default = createTrain;
+},{"./train":18}],6:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -86851,6 +86880,8 @@ var _train = require("./components/train");
 
 var _train2 = _interopRequireDefault(_train);
 
+var _createTrain = require("./components/createTrain");
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -86873,6 +86904,8 @@ const sketch = p5 => {
     let canvas = p5.createCanvas(canvasWidth, canvasHeight);
     p5.frameRate(10);
 
+    (0, _createTrain.createTrain)();
+
     // Your stuff goes in here
   };
 
@@ -86884,7 +86917,7 @@ const sketch = p5 => {
 };
 
 exports.default = sketch;
-},{"p5":7,"p5/lib/addons/p5.sound":9,"p5/lib/addons/p5.dom":8,"./constants":17,"./components/track":19,"./components/train":18}],16:[function(require,module,exports) {
+},{"p5":7,"p5/lib/addons/p5.sound":9,"p5/lib/addons/p5.dom":8,"./constants":17,"./components/track":19,"./components/train":18,"./components/createTrain":20}],16:[function(require,module,exports) {
 var bundleURL = null;
 function getBundleURLCached() {
   if (!bundleURL) {

@@ -7,6 +7,8 @@ import Track from './components/track';
 import Train from './components/train';
 import { width } from './constants';
 
+import { createTrain } from './components/createTrain';
+
 // Sketch scope
 const sketch = (p5) => {
 
@@ -28,7 +30,7 @@ const sketch = (p5) => {
     let canvas = p5.createCanvas(canvasWidth, canvasHeight);
     p5.frameRate(10);
 
-    
+    createTrain();
     
     // Your stuff goes in here
   }

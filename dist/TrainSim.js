@@ -86728,7 +86728,48 @@ src_app = function () {
 
 }));
 
-},{"../p5":6}],3:[function(require,module,exports) {
+},{"../p5":6}],15:[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+const width = exports.width = 1000;
+const height = exports.height = 800;
+const trainLength = exports.trainLength = 120;
+const trainWidth = exports.trainWidth = 40;
+const trainOuterRadius = exports.trainOuterRadius = 3;
+const trainColor = exports.trainColor = "#023F4D";
+},{}],16:[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _constants = require("../constants");
+
+var constants = _interopRequireWildcard(_constants);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+class train {
+  constructor(id, direction, x, y, speed, track) {
+    this.id = id;
+    this.direction = direction;
+    this.pos = { x: x, y: y };
+    this.speed = speed;
+    this.track = track;
+  }
+
+  show() {
+    p5.fill(_constants.trainColor);
+    p5.rect(this.pos.x, this.pos.y, _constants.trainLength, _constants.trainWidth, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius);
+  }
+
+}
+exports.default = train;
+},{"../constants":15}],3:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -86743,14 +86784,24 @@ require("p5/lib/addons/p5.sound");
 
 require("p5/lib/addons/p5.dom");
 
+var _constants = require("./constants");
+
+var constants = _interopRequireWildcard(_constants);
+
+var _train = require("./components/train");
+
+var _train2 = _interopRequireDefault(_train);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Sketch scope
 const sketch = p5 => {
 
   // Variables scoped within p5
-  const canvasWidth = p5.windowWidth;
-  const canvasHeight = p5.windowHeight;
+  const canvasWidth = constants.width;
+  const canvasHeight = constants.height;
 
   // make library globally available
   window.p5 = p5;
@@ -86764,14 +86815,11 @@ const sketch = p5 => {
   };
 
   // Draw function
-  p5.draw = () => {
-    p5.background("yellow");
-    p5.ellipse(50, 50, 80, 80);
-  };
+  p5.draw = () => {};
 };
 
 exports.default = sketch;
-},{"p5":6,"p5/lib/addons/p5.sound":13,"p5/lib/addons/p5.dom":14}],7:[function(require,module,exports) {
+},{"p5":6,"p5/lib/addons/p5.sound":13,"p5/lib/addons/p5.dom":14,"./constants":15,"./components/train":16}],7:[function(require,module,exports) {
 var bundleURL = null;
 function getBundleURLCached() {
   if (!bundleURL) {

@@ -2,8 +2,7 @@ import p5 from 'p5';
 import 'p5/lib/addons/p5.sound';
 import 'p5/lib/addons/p5.dom';
 import * as constants from './constants';
-import Track from './components/track';
-
+import {Track} from './components/createTrack';
 import Train from './components/train';
 import { width } from './constants';
 
@@ -25,13 +24,10 @@ const sketch = (p5) => {
   //Varibles 
   var train= new Train(1, 'W', 10, {x:width, y:100});
 
-
   // Setup function
   p5.setup = () => {
     let canvas = p5.createCanvas(canvasWidth, canvasHeight);
     p5.frameRate(10);
-
-    
     
     // Your stuff goes in here
   }
@@ -40,6 +36,12 @@ const sketch = (p5) => {
   p5.draw = () => {
     p5.background('yellow');
     train.show();
+  }
+}
+
+var createTrack=()=>{
+  for (var i=0;i<Track.length;i++){
+    Track[i].show();
   }
 }
 

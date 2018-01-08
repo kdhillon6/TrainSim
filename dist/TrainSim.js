@@ -86762,7 +86762,43 @@ class track {
 }
 
 exports.default = track;
-},{}],18:[function(require,module,exports) {
+},{}],20:[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _track = require("./track");
+
+var trackSize = 50;
+var txt;
+var trackData = [];
+var tracksObjects = []; //obj
+
+var parseEachTrack = () => {
+  txt = loadString("../txt/track.txt");
+  var tracks = split(txt, '\n');
+  //get each track
+  for (var i = 0; i < tracks.length; i++) {
+    parseTrackData(tracks[i]);
+  }
+};
+
+var parseTrackData = track => {
+  //get each track info
+  trackData = split(track, ' ');
+  //create a track
+  addTrack(trackData);
+};
+
+//call this function from sketch to create tracks
+var addTrack = trackData => {
+  tracksObjects.push(new track(trackData[0], trackData[1], trackData[2], trackData[3]));
+};
+
+exports.default = tracksObjects;
+},{"./track":19}],18:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -86810,9 +86846,7 @@ var _constants = require("./constants");
 
 var constants = _interopRequireWildcard(_constants);
 
-var _track = require("./components/track");
-
-var _track2 = _interopRequireDefault(_track);
+var _createTrack = require("./components/createTrack");
 
 var _train = require("./components/train");
 
@@ -86832,7 +86866,7 @@ const sketch = p5 => {
   // make library globally available
   window.p5 = p5;
 
-  var track = new _track2.default();
+  var track = new _createTrack.Track();
 
   //Varibles 
   var train = new _train2.default(1, 'W', 10, { x: _constants.width, y: 100 });
@@ -86852,8 +86886,14 @@ const sketch = p5 => {
   };
 };
 
+var createTrack = () => {
+  for (var i = 0; i < _createTrack.Track.length; i++) {
+    _createTrack.Track[i].show();
+  }
+};
+
 exports.default = sketch;
-},{"p5":7,"p5/lib/addons/p5.sound":9,"p5/lib/addons/p5.dom":8,"./constants":17,"./components/track":19,"./components/train":18}],16:[function(require,module,exports) {
+},{"p5":7,"p5/lib/addons/p5.sound":9,"p5/lib/addons/p5.dom":8,"./constants":17,"./components/createTrack":20,"./components/train":18}],16:[function(require,module,exports) {
 var bundleURL = null;
 function getBundleURLCached() {
   if (!bundleURL) {

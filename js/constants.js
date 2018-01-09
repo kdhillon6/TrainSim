@@ -8,7 +8,8 @@ export const trainOuterRadius = 3;
 export const trainColor = "#023F4D";
 export const trainCompartmentColor = "white";
 
-export const trainDeaccelerate = 15;
+export const trainDeaccelerate = 0.07;
+export const acceleration = 0.07;
 export const outerR = 25;
 export const innerR = 80;
 

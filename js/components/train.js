@@ -1,12 +1,13 @@
 
-import { trainWidth, trainOuterRadius, trainColor, trainLength, trainCompartmentColor, trainDeaccelerate, outerR, innerR, collisionThresold } from '../constants';
+import { trainWidth, trainOuterRadius, trainColor, trainLength, trainCompartmentColor, trainDeaccelerate, outerR, innerR, collisionThresold, acceleration } from '../constants';
 
 export default class train{
     constructor(id, direction, speed, track){
         this.id = id;
         this.direction = direction;
         this.pos = {x: track.x, y: track.y};
-        
+        this.acceleration = acceleration;
+        this.move = 1;
         if (this.direction == 'W'){
             this.leftTop = { x: this.pos.x, y: this.pos.y };
             this.leftBottom = { x: this.pos.x, y: this.pos.y + trainWidth };
@@ -114,7 +115,20 @@ export default class train{
                     }
                 }
             }
-            if (!stop) this.pos.x += this.speed;
+            if (stop){
+                this.move -= this.move*trainDeaccelerate;
+                if (this.move <= 0 ){
+                    this.move = 0;
+                }
+            }else {
+                if (this.move >= this.speed){
+                    this.move = this.speed;
+                }else{
+                    this.move += this.move *acceleration; 
+                }
+            }
+            this.pos.x += this.move;
+            
 
         }else if ( this.direction == 'W'){
             var stop = false;
@@ -135,7 +149,19 @@ export default class train{
                     }
                 }
             }
-            if (!stop) this.pos.x -= this.speed;
+            if (stop){
+                this.move -= this.move*trainDeaccelerate;
+                if (this.move <= 0 ){
+                    this.move = 0;
+                }
+            }else {
+                if (this.move >= this.speed){
+                    this.move = this.speed;
+                }else{
+                    this.move += this.move *acceleration; 
+                }
+            }
+            this.pos.x -= this.move;
         }
         else if (this.direction == 'N'){
 
@@ -157,7 +183,19 @@ export default class train{
                     }
                 }
             }
-            if (!stop) this.pos.y -= this.speed;
+            if (stop){
+                this.move -= this.move*trainDeaccelerate;
+                if (this.move <= 0 ){
+                    this.move = 0;
+                }
+            }else {
+                if (this.move >= this.speed){
+                    this.move = this.speed;
+                }else{
+                    this.move += this.move *acceleration; 
+                }
+            }
+            this.pos.y -= this.move;
 
         }else if (this.direction == 'S'){
             var stop = false;
@@ -178,7 +216,20 @@ export default class train{
                     }
                 }
             }
-            if (!stop) this.pos.y += this.speed;
+            if (stop){
+                this.move -= this.move*trainDeaccelerate;
+                if (this.move <= 0 ){
+                    this.move = 0;
+                }
+            }else {
+                if (this.move >= this.speed){
+                    this.move = this.speed;
+                }else{
+                    this.move += this.move *acceleration; 
+                }
+            }
+            
+            this.pos.y += this.move;
         }
     
     }

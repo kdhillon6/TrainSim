@@ -25,7 +25,8 @@ const sketch = (p5) => {
   // Setup function
   p5.setup = () => {
     let canvas = p5.createCanvas(canvasWidth, canvasHeight);
-    p5.frameRate(10);
+    canvas.parent('canvas');
+    //p5.frameRate(10);
     // Your stuff goes in here
   }
 

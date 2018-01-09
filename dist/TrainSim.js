@@ -86762,7 +86762,43 @@ class track {
 }
 
 exports.default = track;
-},{}],11:[function(require,module,exports) {
+},{}],24:[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _track = require("./track");
+
+var trackSize = 50;
+var txt;
+var trackData = [];
+var tracksObjects = []; //obj
+
+var parseEachTrack = () => {
+  txt = loadString("../txt/track.txt");
+  var tracks = split(txt, '\n');
+  //get each track
+  for (var i = 0; i < tracks.length; i++) {
+    parseTrackData(tracks[i]);
+  }
+};
+
+var parseTrackData = track => {
+  //get each track info
+  trackData = split(track, ' ');
+  //create a track
+  addTrack(trackData);
+};
+
+//call this function from sketch to create tracks
+var addTrack = trackData => {
+  tracksObjects.push(new track(trackData[0], trackData[1], trackData[2], trackData[3]));
+};
+
+exports.default = tracksObjects;
+},{"./track":12}],11:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -86914,9 +86950,7 @@ var _constants = require("./constants");
 
 var constants = _interopRequireWildcard(_constants);
 
-var _track = require("./components/track");
-
-var _track2 = _interopRequireDefault(_track);
+var _createTrack = require("./components/createTrack");
 
 var _train = require("./components/train");
 
@@ -86946,7 +86980,6 @@ const sketch = p5 => {
   p5.setup = () => {
     let canvas = p5.createCanvas(canvasWidth, canvasHeight);
     p5.frameRate(10);
-
     // Your stuff goes in here
   };
 
@@ -86959,8 +86992,14 @@ const sketch = p5 => {
   };
 };
 
+var createTrack = () => {
+  for (var i = 0; i < _createTrack.Track.length; i++) {
+    _createTrack.Track[i].show();
+  }
+};
+
 exports.default = sketch;
-},{"p5":6,"p5/lib/addons/p5.sound":17,"p5/lib/addons/p5.dom":18,"./constants":10,"./components/track":12,"./components/train":11,"./components/createTrain":19}],7:[function(require,module,exports) {
+},{"p5":6,"p5/lib/addons/p5.sound":17,"p5/lib/addons/p5.dom":18,"./constants":10,"./components/createTrack":24,"./components/train":11,"./components/createTrain":19}],7:[function(require,module,exports) {
 var bundleURL = null;
 function getBundleURLCached() {
   if (!bundleURL) {

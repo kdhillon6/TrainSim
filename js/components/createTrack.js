@@ -1,32 +1,29 @@
 import {Track} from './track';
 
-//globals
 var trackSize=50;
 var txt;
-var tracks=[];//string
 var trackData=[];
 var tracksObjects=[];//obj
 
-parseEachTrack=()=>{
+var parseEachTrack=()=>{
 	txt=loadString("../txt/track.txt");
-	tracks= split(txt,'\n');
+	var tracks= split(txt,'\n');
 	//get each track
-	for(int i=0;i<tracks.length();i++){
+	for(var i=0;i<tracks.length;i++){
 		parseTrackData(tracks[i]);
 	}
 }
 
-parseTrackData =(track,i)=>{
+var parseTrackData =(track)=>{
 	//get each track info
 	trackData= split(track,' ');
 	//create a track
-	createTrack(trackData,i);
+	addTrack(trackData);
 }
 
 //call this function from sketch to create tracks
-createTrack=(trackData,i)=>{
+var addTrack=(trackData)=>{
 	tracksObjects.push(new track(trackData[0],trackData[1],trackData[2],trackData[3]));
-	tracksObjects[i].show();
 }
 
-export default createTrack;
+export default tracksObjects;

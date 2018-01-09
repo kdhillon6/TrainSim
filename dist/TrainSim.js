@@ -69,11 +69,7 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-<<<<<<< HEAD
-})({11:[function(require,module,exports) {
-=======
-})({15:[function(require,module,exports) {
->>>>>>> 0fd7eb6c912dcd72cc1b005f194c89707ef54fec
+})({10:[function(require,module,exports) {
 'use strict'
 
 exports.byteLength = byteLength
@@ -189,11 +185,7 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
-<<<<<<< HEAD
 },{}],12:[function(require,module,exports) {
-=======
-},{}],16:[function(require,module,exports) {
->>>>>>> 0fd7eb6c912dcd72cc1b005f194c89707ef54fec
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = nBytes * 8 - mLen - 1
@@ -279,22 +271,14 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-<<<<<<< HEAD
-},{}],10:[function(require,module,exports) {
-=======
-},{}],14:[function(require,module,exports) {
->>>>>>> 0fd7eb6c912dcd72cc1b005f194c89707ef54fec
+},{}],11:[function(require,module,exports) {
 var toString = {}.toString;
 
 module.exports = Array.isArray || function (arr) {
   return toString.call(arr) == '[object Array]';
 };
 
-<<<<<<< HEAD
-},{}],9:[function(require,module,exports) {
-=======
 },{}],8:[function(require,module,exports) {
->>>>>>> 0fd7eb6c912dcd72cc1b005f194c89707ef54fec
 
 var global = (1,eval)("this");
 /*!
@@ -2087,11 +2071,7 @@ function isnan (val) {
   return val !== val // eslint-disable-line no-self-compare
 }
 
-<<<<<<< HEAD
-},{"base64-js":11,"ieee754":12,"isarray":10,"buffer":9}],8:[function(require,module,exports) {
-=======
-},{"base64-js":15,"ieee754":16,"isarray":14,"buffer":8}],9:[function(require,module,exports) {
->>>>>>> 0fd7eb6c912dcd72cc1b005f194c89707ef54fec
+},{"base64-js":10,"ieee754":12,"isarray":11,"buffer":8}],9:[function(require,module,exports) {
 
 // shim for using process in browser
 var process = module.exports = {};
@@ -73688,11 +73668,7 @@ module.exports = p5;
 
 },{"../core/core":55,"./p5.Geometry":102}]},{},[46])(46)
 });
-<<<<<<< HEAD
-},{"buffer":9,"process":8}],18:[function(require,module,exports) {
-=======
-},{"buffer":8,"process":9}],17:[function(require,module,exports) {
->>>>>>> 0fd7eb6c912dcd72cc1b005f194c89707ef54fec
+},{"buffer":8,"process":9}],22:[function(require,module,exports) {
 /*! p5.sound.js v0.3.5 2017-07-28 */
 /**
  *  p5.sound extends p5 with <a href="http://caniuse.com/audio-api"
@@ -84214,11 +84190,7 @@ src_app = function () {
 }(sndcore, master, helpers, errorHandler, panner, soundfile, amplitude, fft, signal, oscillator, env, pulse, noise, audioin, filter, delay, reverb, metro, looper, compressor, soundRecorder, peakdetect, gain, distortion);
 }));
 
-<<<<<<< HEAD
-},{"../p5":6}],19:[function(require,module,exports) {
-=======
-},{"../p5":6}],18:[function(require,module,exports) {
->>>>>>> 0fd7eb6c912dcd72cc1b005f194c89707ef54fec
+},{"../p5":6}],21:[function(require,module,exports) {
 /*! p5.dom.js v0.3.4 Aug 11, 2017 */
 /**
  * <p>The web is much more than just canvas and p5.dom makes it easy to interact
@@ -86756,11 +86728,7 @@ src_app = function () {
 
 }));
 
-<<<<<<< HEAD
 },{"../p5":6}],13:[function(require,module,exports) {
-=======
-},{"../p5":6}],10:[function(require,module,exports) {
->>>>>>> 0fd7eb6c912dcd72cc1b005f194c89707ef54fec
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -86775,77 +86743,78 @@ const trainWidth = exports.trainWidth = 40;
 const trainOuterRadius = exports.trainOuterRadius = 3;
 const trainColor = exports.trainColor = "#023F4D";
 const trainCompartmentColor = exports.trainCompartmentColor = "white";
-<<<<<<< HEAD
-},{}],17:[function(require,module,exports) {
-=======
-},{}],12:[function(require,module,exports) {
->>>>>>> 0fd7eb6c912dcd72cc1b005f194c89707ef54fec
+},{}],24:[function(require,module,exports) {
+module.exports="/dist/10756d2ffb1e968fcc9b703173e482d6.png";
+},{}],20:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _trainTrack = require("./trainTrack.png");
+
+var _trainTrack2 = _interopRequireDefault(_trainTrack);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 class track {
   constructor(id, direction, x, y) {
     this.id = id;
     this.direction = direction;
     this.x = x;
     this.y = y;
+    this.img = p5.loadImage(_trainTrack2.default);
   }
   show() {
-    rect(x, y, x + trackSize, y + trackSize);
+    p5.fill("black");
+    if (this.direction == "e") {
+      p5.rect(this.x, this.y, 1000, 50);
+      p5.image(this.img, this.x, this.y, 1000, 50);
+    }
+
+    if (this.direction == "s") {
+      console.log("asd");
+      p5.image(this.img, this.x, this.y, 50, 8000);
+      //p5.rect(this.x,this.y,50,800);
+    }
   }
 }
-
 exports.default = track;
-<<<<<<< HEAD
+},{"./trainTrack.png":24}],17:[function(require,module,exports) {
+
 },{}],14:[function(require,module,exports) {
-=======
-},{}],24:[function(require,module,exports) {
->>>>>>> 0fd7eb6c912dcd72cc1b005f194c89707ef54fec
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.tracksObjects = undefined;
+exports.createTrack = createTrack;
 
 var _track = require("./track");
 
-var trackSize = 50;
-var txt;
-var trackData = [];
-var tracksObjects = []; //obj
+var _track2 = _interopRequireDefault(_track);
 
-var parseEachTrack = () => {
-  txt = loadString("../txt/track.txt");
-  var tracks = split(txt, '\n');
-  //get each track
-  for (var i = 0; i < tracks.length; i++) {
-    parseTrackData(tracks[i]);
-  }
-};
+var _fs = require("fs");
 
-var parseTrackData = track => {
-  //get each track info
-  trackData = split(track, ' ');
-  //create a track
-  addTrack(trackData);
-};
+var _fs2 = _interopRequireDefault(_fs);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //call this function from sketch to create tracks
-var addTrack = trackData => {
-  t1 = new track(trackData[0], trackData[1], trackData[2], trackData[3]);
-  tracksObjects.push(t1);
-};
+function createTrack() {
+  var txt = "1 e 0 300\r\n2 e 600 0\r\n3 w 300 1000\r\n4 w 700 1000\r\n5 n 100 100\r\n6 s 100 100";
+  var tracks = txt.split("\n");
 
-<<<<<<< HEAD
-exports.tracksObjects = tracksObjects;
-},{"./track":17}],15:[function(require,module,exports) {
-=======
-exports.default = tracksObjects;
-},{"./track":12}],11:[function(require,module,exports) {
->>>>>>> 0fd7eb6c912dcd72cc1b005f194c89707ef54fec
+  //get each track
+  for (let i = 0; i < tracks.length; i++) {
+    var trackData = tracks[i].split(" ");
+
+    let t1 = new _track2.default(trackData[0], trackData[1], parseInt(trackData[2]), parseInt(trackData[3]));
+    Tracks.push(t1);
+  }
+}
+},{"./track":20,"fs":17}],16:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -86941,13 +86910,7 @@ class train {
 
 }
 exports.default = train;
-<<<<<<< HEAD
-},{"../constants":13}],16:[function(require,module,exports) {
-=======
-},{"../constants":10}],20:[function(require,module,exports) {
-
-},{}],19:[function(require,module,exports) {
->>>>>>> 0fd7eb6c912dcd72cc1b005f194c89707ef54fec
+},{"../constants":13}],15:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -86978,16 +86941,11 @@ function createTrainObj(line) {
   let data = line.split(" ");
   console.log(data);
 
-<<<<<<< HEAD
-exports.default = createTrain;
-},{"./train":15}],4:[function(require,module,exports) {
-=======
   let obj = new _train2.default(parseInt(data[0]), data[1], parseInt(data[2]), { x: parseInt(data[3]), y: parseInt(data[4]) });
   Trains.push(obj);
   //console.log("Appended obj:" + obj.id);
 }
-},{"./train":11,"fs":20}],4:[function(require,module,exports) {
->>>>>>> 0fd7eb6c912dcd72cc1b005f194c89707ef54fec
+},{"./train":16,"fs":17}],3:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -87018,6 +86976,8 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//asdfhl
+
 // Sketch scope
 const sketch = p5 => {
 
@@ -87029,13 +86989,8 @@ const sketch = p5 => {
   window.p5 = p5;
   window.Trains = [];
   window.Tracks = [];
-<<<<<<< HEAD
-  var train = new _train2.default(1, 'S', 5, { x: 100, y: 0 });
-=======
-
+  (0, _createTrack.createTrack)();
   (0, _createTrain.createTrain)();
->>>>>>> 0fd7eb6c912dcd72cc1b005f194c89707ef54fec
-
   // Setup function
   p5.setup = () => {
     let canvas = p5.createCanvas(canvasWidth, canvasHeight);
@@ -87046,24 +87001,20 @@ const sketch = p5 => {
   // Draw function
   p5.draw = () => {
     p5.background('yellow');
+
+    for (let i = 0; i < Tracks.length; i++) {
+      Tracks[i].show();
+    }
+
     for (let i = 0; i < Trains.length; i++) {
       Trains[i].show();
     }
+    //console.log(Tracks.length)
   };
 };
 
-var createTrack = () => {
-  for (var i = 0; i < _createTrack.Track.length; i++) {
-    _createTrack.Track[i].show();
-  }
-};
-
 exports.default = sketch;
-<<<<<<< HEAD
-},{"p5":6,"p5/lib/addons/p5.sound":18,"p5/lib/addons/p5.dom":19,"./constants":13,"./components/createTrack":14,"./components/train":15,"./components/createTrain":16}],7:[function(require,module,exports) {
-=======
-},{"p5":6,"p5/lib/addons/p5.sound":17,"p5/lib/addons/p5.dom":18,"./constants":10,"./components/createTrack":24,"./components/train":11,"./components/createTrain":19}],7:[function(require,module,exports) {
->>>>>>> 0fd7eb6c912dcd72cc1b005f194c89707ef54fec
+},{"p5":6,"p5/lib/addons/p5.sound":22,"p5/lib/addons/p5.dom":21,"./constants":13,"./components/createTrack":14,"./components/train":16,"./components/createTrain":15}],7:[function(require,module,exports) {
 var bundleURL = null;
 function getBundleURLCached() {
   if (!bundleURL) {
@@ -87126,7 +87077,7 @@ function reloadCSS() {
 
 module.exports = reloadCSS;
 
-},{"./bundle-url":7}],3:[function(require,module,exports) {
+},{"./bundle-url":7}],4:[function(require,module,exports) {
 
         var reloadCSS = require('_css_loader');
         module.hot.dispose(reloadCSS);
@@ -87149,7 +87100,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // Initialize sketch
 new _p2.default(_sketch2.default);
-},{"p5":6,"./js/sketch":4,"./styles/main.css":3}],0:[function(require,module,exports) {
+},{"p5":6,"./js/sketch":3,"./styles/main.css":4}],0:[function(require,module,exports) {
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
 function Module() {
@@ -87167,11 +87118,7 @@ function Module() {
 module.bundle.Module = Module;
 
 if (!module.bundle.parent && typeof WebSocket !== 'undefined') {
-<<<<<<< HEAD
-  var ws = new WebSocket('ws://' + window.location.hostname + ':62346/');
-=======
-  var ws = new WebSocket('ws://' + window.location.hostname + ':49864/');
->>>>>>> 0fd7eb6c912dcd72cc1b005f194c89707ef54fec
+  var ws = new WebSocket('ws://' + window.location.hostname + ':55758/');
   ws.onmessage = function(event) {
     var data = JSON.parse(event.data);
 

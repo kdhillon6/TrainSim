@@ -86743,6 +86743,12 @@ const trainWidth = exports.trainWidth = 40;
 const trainOuterRadius = exports.trainOuterRadius = 3;
 const trainColor = exports.trainColor = "#023F4D";
 const trainCompartmentColor = exports.trainCompartmentColor = "white";
+
+const trainDeaccelerate = exports.trainDeaccelerate = 15;
+const outerR = exports.outerR = 25;
+const innerR = exports.innerR = 80;
+
+const collisionThresold = exports.collisionThresold = 105;
 },{}],12:[function(require,module,exports) {
 "use strict";
 
@@ -86813,26 +86819,38 @@ class train {
     this.direction = direction;
     this.pos = { x: track.x, y: track.y };
 
-    if (this.direction == 'E') {
+    if (this.direction == 'W') {
       this.leftTop = { x: this.pos.x, y: this.pos.y };
       this.leftBottom = { x: this.pos.x, y: this.pos.y + _constants.trainWidth };
       this.rightTop = { x: this.pos.x + _constants.trainLength, y: this.pos.y };
       this.rightBottom = { x: this.pos.x + _constants.trainLength, y: this.pos.y + _constants.trainWidth };
-    } else if (this.direction == 'W') {
+
+      this.outerRpos = { x: this.pos.x - _constants.outerR, y: this.pos.y + _constants.trainWidth / 2 };
+      this.innerRpos = { x: this.pos.x + _constants.innerR, y: this.pos.y + _constants.trainWidth / 2 };
+    } else if (this.direction == 'E') {
       this.leftTop = { x: this.pos.x - _constants.trainWidth, y: this.pos.y };
       this.leftBottom = { x: this.pos.x - _constants.trainWidth, y: this.pos.y + _constants.trainWidth };
       this.rightTop = { x: this.pos.x, y: this.pos.y };
       this.rightBottom = { x: this.pos.x, y: this.pos.y + _constants.trainWidth };
-    } else if (this.direction == 'N') {
+
+      this.outerRpos = { x: this.pos.x + _constants.outerR, y: this.pos.y + _constants.trainWidth / 2 };
+      this.innerRpos = { x: this.pos.x - _constants.innerR, y: this.pos.y + _constants.trainWidth / 2 };
+    } else if (this.direction == 'S') {
       this.leftTop = { x: this.pos.x, y: this.pos.y - _constants.trainLength };
       this.leftBottom = { x: this.pos.x, y: this.pos.y };
       this.rightTop = { x: this.pos.x + _constants.trainWidth, y: this.pos.y - _constants.trainLength };
       this.rightBottom = { x: this.pos.x + _constants.trainWidth, y: this.pos.y };
-    } else if (this.direction == 'S') {
+
+      this.outerRpos = { x: this.pos.x + _constants.trainWidth / 2, y: this.pos.y + _constants.outerR };
+      this.innerRpos = { x: this.pos.x + _constants.trainWidth / 2, y: this.pos.y - _constants.innerR };
+    } else if (this.direction == 'N') {
       this.leftTop = { x: this.pos.x, y: this.pos.y };
       this.leftBottom = { x: this.pos.x, y: this.pos.y + _constants.trainLength };
       this.rightTop = { x: this.pos.x + _constants.trainWidth, y: this.pos.y };
       this.rightBottom = { x: this.pos.x + _constants.trainWidth, y: this.pos.y + _constants.trainLength };
+
+      this.outerRpos = { x: this.pos.x + _constants.trainWidth / 2, y: this.pos.y - _constants.outerR };
+      this.innerRpos = { x: this.pos.x + _constants.trainWidth / 2, y: this.pos.y + _constants.innerR };
     }
 
     this.speed = speed;
@@ -86843,22 +86861,23 @@ class train {
     if (this.direction == 'E') {
       p5.strokeWeight(1);
       p5.fill(_constants.trainColor);
-      p5.rect(this.pos.x, this.pos.y, _constants.trainLength, _constants.trainWidth, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius);
-      for (let x = this.pos.x + 40; x < this.pos.x + _constants.trainLength; x += 40) {
-        p5.strokeWeight(2);
-        p5.stroke(_constants.trainCompartmentColor);
-        p5.line(x, this.pos.y, x, this.pos.y + _constants.trainWidth);
-      }
-    } else if (this.direction == 'W') {
-      p5.strokeWeight(1);
-      p5.fill(_constants.trainColor);
       p5.rect(this.pos.x - _constants.trainLength, this.pos.y, _constants.trainLength, _constants.trainWidth, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius);
       for (let x = this.pos.x - _constants.trainLength + 40; x < this.pos.x; x += 40) {
         p5.strokeWeight(2);
         p5.stroke(_constants.trainCompartmentColor);
         p5.line(x, this.pos.y, x, this.pos.y + _constants.trainWidth);
       }
-    } else if (this.direction == 'S') {
+    } else if (this.direction == 'W') {
+
+      p5.strokeWeight(1);
+      p5.fill(_constants.trainColor);
+      p5.rect(this.pos.x, this.pos.y, _constants.trainLength, _constants.trainWidth, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius);
+      for (let x = this.pos.x + 40; x < this.pos.x + _constants.trainLength; x += 40) {
+        p5.strokeWeight(2);
+        p5.stroke(_constants.trainCompartmentColor);
+        p5.line(x, this.pos.y, x, this.pos.y + _constants.trainWidth);
+      }
+    } else if (this.direction == 'N') {
       p5.strokeWeight(1);
       p5.fill(_constants.trainColor);
       p5.rect(this.pos.x, this.pos.y, _constants.trainWidth, _constants.trainLength, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius);
@@ -86867,7 +86886,7 @@ class train {
         p5.stroke(_constants.trainCompartmentColor);
         p5.line(this.pos.x, y, this.pos.x + _constants.trainWidth, y);
       }
-    } else if (this.direction == 'N') {
+    } else if (this.direction == 'S') {
       p5.strokeWeight(1);
       p5.fill(_constants.trainColor);
       p5.rect(this.pos.x, this.pos.y - _constants.trainLength, _constants.trainWidth, _constants.trainLength, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius, _constants.trainOuterRadius);
@@ -86880,18 +86899,126 @@ class train {
   }
 
   update(Trains) {
-
-    for (train in Trains) {
-      if (this.direction == 'E') {
-        for (train in Trains) {
-          if (train.direction == 'N' || train.direction == 'S') {
-            // if (this.pos.x )
+    this.updateCordinate();
+    if (this.direction == 'E') {
+      var stop = false;
+      for (let i = 0; i < Trains.length; i++) {
+        var other = Trains[i];
+        //Dont check with self
+        if (this.id == other.id) {
+          continue;
+        }
+        if (other.direction == 'N' || other.direction == 'S') {
+          var dist = p5.dist(this.outerRpos.x, this.outerRpos.y, other.innerRpos.x, other.innerRpos.y);
+          if (dist < _constants.collisionThresold) stop = true;
+        } else {
+          if (other.pos.y == this.pos.y) {
+            if (p5.dist(this.outerRpos.x, this.outerRpos.y, other.innerRpos.x, other.innerRpos.y) < _constants.collisionThresold) {
+              stop = true;
+            }
           }
         }
-      } else if (this.direction == 'W') {} else if (this.direction == 'N') {} else if (this.direction == 'S') {}
+      }
+      if (!stop) this.pos.x += this.speed;
+    } else if (this.direction == 'W') {
+      var stop = false;
+      for (let i = 0; i < Trains.length; i++) {
+        var other = Trains[i];
+        //Dont check with self
+        if (this.id == other.id) {
+          continue;
+        }
+        if (other.direction == 'N' || other.direction == 'S') {
+          var dist = p5.dist(this.outerRpos.x, this.outerRpos.y, other.innerRpos.x, other.innerRpos.y);
+          if (dist < _constants.collisionThresold) stop = true;
+        } else {
+          if (other.pos.y == this.pos.y) {
+            if (p5.dist(this.outerRpos.x, this.outerRpos.y, other.innerRpos.x, other.innerRpos.y) < _constants.collisionThresold) {
+              stop = true;
+            }
+          }
+        }
+      }
+      if (!stop) this.pos.x -= this.speed;
+    } else if (this.direction == 'N') {
+
+      var stop = false;
+      for (let i = 0; i < Trains.length; i++) {
+        var other = Trains[i];
+        //Dont check with self
+        if (this.id == other.id) {
+          continue;
+        }
+        if (other.direction == 'E' || other.direction == 'W') {
+          var dist = p5.dist(this.outerRpos.x, this.outerRpos.y, other.innerRpos.x, other.innerRpos.y);
+          if (dist < _constants.collisionThresold) stop = true;
+        } else {
+          if (other.pos.x == this.pos.x) {
+            if (p5.dist(this.outerRpos.x, this.outerRpos.y, other.innerRpos.x, other.innerRpos.y) < _constants.collisionThresold) {
+              stop = true;
+            }
+          }
+        }
+      }
+      if (!stop) this.pos.y -= this.speed;
+    } else if (this.direction == 'S') {
+      var stop = false;
+      for (let i = 0; i < Trains.length; i++) {
+        var other = Trains[i];
+        //Dont check with self
+        if (this.id == other.id) {
+          continue;
+        }
+        if (other.direction == 'E' || other.direction == 'W') {
+          var dist = p5.dist(this.outerRpos.x, this.outerRpos.y, other.innerRpos.x, other.innerRpos.y);
+          if (dist < _constants.collisionThresold) stop = true;
+        } else {
+          if (other.pos.x == this.pos.x) {
+            if (p5.dist(this.outerRpos.x, this.outerRpos.y, other.innerRpos.x, other.innerRpos.y) < _constants.collisionThresold) {
+              stop = true;
+            }
+          }
+        }
+      }
+      if (!stop) this.pos.y += this.speed;
     }
   }
 
+  updateCordinate() {
+    if (this.direction == 'W') {
+      this.leftTop = { x: this.pos.x, y: this.pos.y };
+      this.leftBottom = { x: this.pos.x, y: this.pos.y + _constants.trainWidth };
+      this.rightTop = { x: this.pos.x + _constants.trainLength, y: this.pos.y };
+      this.rightBottom = { x: this.pos.x + _constants.trainLength, y: this.pos.y + _constants.trainWidth };
+
+      this.outerRpos = { x: this.pos.x - _constants.outerR, y: this.pos.y + _constants.trainWidth / 2 };
+      this.innerRpos = { x: this.pos.x + _constants.innerR, y: this.pos.y + _constants.trainWidth / 2 };
+    } else if (this.direction == 'E') {
+      this.leftTop = { x: this.pos.x - _constants.trainWidth, y: this.pos.y };
+      this.leftBottom = { x: this.pos.x - _constants.trainWidth, y: this.pos.y + _constants.trainWidth };
+      this.rightTop = { x: this.pos.x, y: this.pos.y };
+      this.rightBottom = { x: this.pos.x, y: this.pos.y + _constants.trainWidth };
+
+      this.outerRpos = { x: this.pos.x + _constants.outerR, y: this.pos.y + _constants.trainWidth / 2 };
+      this.innerRpos = { x: this.pos.x - _constants.innerR, y: this.pos.y + _constants.trainWidth / 2 };
+    } else if (this.direction == 'S') {
+      this.leftTop = { x: this.pos.x, y: this.pos.y - _constants.trainLength };
+      this.leftBottom = { x: this.pos.x, y: this.pos.y };
+      this.rightTop = { x: this.pos.x + _constants.trainWidth, y: this.pos.y - _constants.trainLength };
+      this.rightBottom = { x: this.pos.x + _constants.trainWidth, y: this.pos.y };
+
+      this.outerRpos = { x: this.pos.x + _constants.trainWidth / 2, y: this.pos.y + _constants.outerR };
+      this.innerRpos = { x: this.pos.x + _constants.trainWidth / 2, y: this.pos.y - _constants.innerR };
+    } else if (this.direction == 'N') {
+      this.leftTop = { x: this.pos.x, y: this.pos.y };
+      this.leftBottom = { x: this.pos.x, y: this.pos.y + _constants.trainLength };
+      this.rightTop = { x: this.pos.x + _constants.trainWidth, y: this.pos.y };
+      this.rightBottom = { x: this.pos.x + _constants.trainWidth, y: this.pos.y + _constants.trainLength };
+
+      this.outerRpos = { x: this.pos.x + _constants.trainWidth / 2, y: this.pos.y - _constants.outerR };
+      this.innerRpos = { x: this.pos.x + _constants.trainWidth / 2, y: this.pos.y + _constants.innerR };
+    }
+  }
 }
 exports.default = train;
 },{"../constants":10}],20:[function(require,module,exports) {
@@ -86915,7 +87042,7 @@ var _fs2 = _interopRequireDefault(_fs);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function createTrain() {
-  var txt = "id dir speed x y\r\n1 E 10 100 100\r\n2 N 5 100 800";
+  var txt = "id dir speed x y\r\n1 E 4 400 100\r\n6 E 10 100 100\r\n2 N 5 100 150\r\n3 N 9 300 700\r\n4 E 5 10 300\r\n5 S 7 340 0";
   var lines = txt.split("\n");
 
   for (let i = 1; i < lines.length; i++) {
@@ -86988,14 +87115,9 @@ const sketch = p5 => {
     p5.background('yellow');
     for (let i = 0; i < Trains.length; i++) {
       Trains[i].show();
+      Trains[i].update(Trains);
     }
   };
-};
-
-var createTrack = () => {
-  for (var i = 0; i < _createTrack.Track.length; i++) {
-    _createTrack.Track[i].show();
-  }
 };
 
 exports.default = sketch;

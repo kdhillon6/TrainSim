@@ -11,8 +11,6 @@ import { createTrain } from './components/createTrain';
 // Sketch scope
 const sketch = (p5) => {
 
- 
-
   // Variables scoped within p5
   const canvasWidth = constants.width;
   const canvasHeight = constants.height;
@@ -36,14 +34,11 @@ const sketch = (p5) => {
     p5.background('yellow');
     for (let i =0 ; i<Trains.length ; i++){
       Trains[i].show();
+      Trains[i].update(Trains);
     }
+
   }
 }
 
-var createTrack=()=>{
-  for (var i=0;i<Track.length;i++){
-    Track[i].show();
-  }
-}
 
 export default sketch;

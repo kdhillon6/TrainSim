@@ -6,13 +6,13 @@ import Track from './components/track';
 
 import Train from './components/train';
 import { width } from './constants';
-
 import { createTrain } from './components/createTrain';
+
 
 // Sketch scope
 const sketch = (p5) => {
 
-
+ 
 
   // Variables scoped within p5
   const canvasWidth = constants.width;
@@ -24,13 +24,15 @@ const sketch = (p5) => {
   window.Tracks = []
   var train = new Train(1, 'S', 5, {x: 100, y: 0});
 
+  createTrain();
+
 
   // Setup function
   p5.setup = () => {
     let canvas = p5.createCanvas(canvasWidth, canvasHeight);
     p5.frameRate(10);
-
-    createTrain();
+    
+    
     
     // Your stuff goes in here
   }

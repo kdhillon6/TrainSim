@@ -1,18 +1,20 @@
 import Train from './train';
+import fs from 'fs';
 
-createTrain = ()=>{
-	var txt=loadString("../txt/train.txt");
-    var trains= split(txt,'\n');
-    console.log(trains);
-	//get each track
-	for(var i=0;i<tracks.length();i++){
-		parseTrackData(tracks[i]);
+export function createTrain(){
+	var txt = fs.readFileSync ('txt/trains.txt', 'utf8' );
+	var lines = txt.split("\n");
+	
+	for (let i=0; i < lines.length ; i++){
+		createTrainObj(lines[i]);
 	}
+
 }
 
-parseTrackData =(train,i)=>{
-	//get each track info
-	trackData= split(train,' ');
-}
 
-export default createTrain;
+function createTrainObj(line){
+	let data = line.split(" ");
+	console.log(data);
+	
+
+}

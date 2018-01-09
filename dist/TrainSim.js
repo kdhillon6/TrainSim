@@ -69,7 +69,11 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
+<<<<<<< HEAD
+})({11:[function(require,module,exports) {
+=======
 })({15:[function(require,module,exports) {
+>>>>>>> 0fd7eb6c912dcd72cc1b005f194c89707ef54fec
 'use strict'
 
 exports.byteLength = byteLength
@@ -185,7 +189,11 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
+<<<<<<< HEAD
+},{}],12:[function(require,module,exports) {
+=======
 },{}],16:[function(require,module,exports) {
+>>>>>>> 0fd7eb6c912dcd72cc1b005f194c89707ef54fec
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = nBytes * 8 - mLen - 1
@@ -271,14 +279,22 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
+<<<<<<< HEAD
+},{}],10:[function(require,module,exports) {
+=======
 },{}],14:[function(require,module,exports) {
+>>>>>>> 0fd7eb6c912dcd72cc1b005f194c89707ef54fec
 var toString = {}.toString;
 
 module.exports = Array.isArray || function (arr) {
   return toString.call(arr) == '[object Array]';
 };
 
+<<<<<<< HEAD
+},{}],9:[function(require,module,exports) {
+=======
 },{}],8:[function(require,module,exports) {
+>>>>>>> 0fd7eb6c912dcd72cc1b005f194c89707ef54fec
 
 var global = (1,eval)("this");
 /*!
@@ -2071,7 +2087,11 @@ function isnan (val) {
   return val !== val // eslint-disable-line no-self-compare
 }
 
+<<<<<<< HEAD
+},{"base64-js":11,"ieee754":12,"isarray":10,"buffer":9}],8:[function(require,module,exports) {
+=======
 },{"base64-js":15,"ieee754":16,"isarray":14,"buffer":8}],9:[function(require,module,exports) {
+>>>>>>> 0fd7eb6c912dcd72cc1b005f194c89707ef54fec
 
 // shim for using process in browser
 var process = module.exports = {};
@@ -73668,7 +73688,11 @@ module.exports = p5;
 
 },{"../core/core":55,"./p5.Geometry":102}]},{},[46])(46)
 });
+<<<<<<< HEAD
+},{"buffer":9,"process":8}],18:[function(require,module,exports) {
+=======
 },{"buffer":8,"process":9}],17:[function(require,module,exports) {
+>>>>>>> 0fd7eb6c912dcd72cc1b005f194c89707ef54fec
 /*! p5.sound.js v0.3.5 2017-07-28 */
 /**
  *  p5.sound extends p5 with <a href="http://caniuse.com/audio-api"
@@ -84190,7 +84214,11 @@ src_app = function () {
 }(sndcore, master, helpers, errorHandler, panner, soundfile, amplitude, fft, signal, oscillator, env, pulse, noise, audioin, filter, delay, reverb, metro, looper, compressor, soundRecorder, peakdetect, gain, distortion);
 }));
 
+<<<<<<< HEAD
+},{"../p5":6}],19:[function(require,module,exports) {
+=======
 },{"../p5":6}],18:[function(require,module,exports) {
+>>>>>>> 0fd7eb6c912dcd72cc1b005f194c89707ef54fec
 /*! p5.dom.js v0.3.4 Aug 11, 2017 */
 /**
  * <p>The web is much more than just canvas and p5.dom makes it easy to interact
@@ -86728,7 +86756,11 @@ src_app = function () {
 
 }));
 
+<<<<<<< HEAD
+},{"../p5":6}],13:[function(require,module,exports) {
+=======
 },{"../p5":6}],10:[function(require,module,exports) {
+>>>>>>> 0fd7eb6c912dcd72cc1b005f194c89707ef54fec
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -86743,13 +86775,20 @@ const trainWidth = exports.trainWidth = 40;
 const trainOuterRadius = exports.trainOuterRadius = 3;
 const trainColor = exports.trainColor = "#023F4D";
 const trainCompartmentColor = exports.trainCompartmentColor = "white";
+<<<<<<< HEAD
 
 const trainDeaccelerate = exports.trainDeaccelerate = 15;
 const outerR = exports.outerR = 25;
 const innerR = exports.innerR = 80;
 
 const collisionThresold = exports.collisionThresold = 105;
+=======
+<<<<<<< HEAD
+},{}],17:[function(require,module,exports) {
+=======
+>>>>>>> 7d91eea7fc0a508baee9811edc6dbc4ef7d39868
 },{}],12:[function(require,module,exports) {
+>>>>>>> 0fd7eb6c912dcd72cc1b005f194c89707ef54fec
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -86768,12 +86807,17 @@ class track {
 }
 
 exports.default = track;
+<<<<<<< HEAD
+},{}],14:[function(require,module,exports) {
+=======
 },{}],24:[function(require,module,exports) {
+>>>>>>> 0fd7eb6c912dcd72cc1b005f194c89707ef54fec
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.tracksObjects = undefined;
 
 var _track = require("./track");
 
@@ -86800,11 +86844,17 @@ var parseTrackData = track => {
 
 //call this function from sketch to create tracks
 var addTrack = trackData => {
-  tracksObjects.push(new track(trackData[0], trackData[1], trackData[2], trackData[3]));
+  t1 = new track(trackData[0], trackData[1], trackData[2], trackData[3]);
+  tracksObjects.push(t1);
 };
 
+<<<<<<< HEAD
+exports.tracksObjects = tracksObjects;
+},{"./track":17}],15:[function(require,module,exports) {
+=======
 exports.default = tracksObjects;
 },{"./track":12}],11:[function(require,module,exports) {
+>>>>>>> 0fd7eb6c912dcd72cc1b005f194c89707ef54fec
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -87021,9 +87071,13 @@ class train {
   }
 }
 exports.default = train;
+<<<<<<< HEAD
+},{"../constants":13}],16:[function(require,module,exports) {
+=======
 },{"../constants":10}],20:[function(require,module,exports) {
 
 },{}],19:[function(require,module,exports) {
+>>>>>>> 0fd7eb6c912dcd72cc1b005f194c89707ef54fec
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -87054,11 +87108,16 @@ function createTrainObj(line) {
   let data = line.split(" ");
   console.log(data);
 
+<<<<<<< HEAD
+exports.default = createTrain;
+},{"./train":15}],4:[function(require,module,exports) {
+=======
   let obj = new _train2.default(parseInt(data[0]), data[1], parseInt(data[2]), { x: parseInt(data[3]), y: parseInt(data[4]) });
   Trains.push(obj);
   //console.log("Appended obj:" + obj.id);
 }
 },{"./train":11,"fs":20}],4:[function(require,module,exports) {
+>>>>>>> 0fd7eb6c912dcd72cc1b005f194c89707ef54fec
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -87100,8 +87159,12 @@ const sketch = p5 => {
   window.p5 = p5;
   window.Trains = [];
   window.Tracks = [];
+<<<<<<< HEAD
+  var train = new _train2.default(1, 'S', 5, { x: 100, y: 0 });
+=======
 
   (0, _createTrain.createTrain)();
+>>>>>>> 0fd7eb6c912dcd72cc1b005f194c89707ef54fec
 
   // Setup function
   p5.setup = () => {
@@ -87121,7 +87184,11 @@ const sketch = p5 => {
 };
 
 exports.default = sketch;
+<<<<<<< HEAD
+},{"p5":6,"p5/lib/addons/p5.sound":18,"p5/lib/addons/p5.dom":19,"./constants":13,"./components/createTrack":14,"./components/train":15,"./components/createTrain":16}],7:[function(require,module,exports) {
+=======
 },{"p5":6,"p5/lib/addons/p5.sound":17,"p5/lib/addons/p5.dom":18,"./constants":10,"./components/createTrack":24,"./components/train":11,"./components/createTrain":19}],7:[function(require,module,exports) {
+>>>>>>> 0fd7eb6c912dcd72cc1b005f194c89707ef54fec
 var bundleURL = null;
 function getBundleURLCached() {
   if (!bundleURL) {
@@ -87225,7 +87292,11 @@ function Module() {
 module.bundle.Module = Module;
 
 if (!module.bundle.parent && typeof WebSocket !== 'undefined') {
+<<<<<<< HEAD
+  var ws = new WebSocket('ws://' + window.location.hostname + ':62346/');
+=======
   var ws = new WebSocket('ws://' + window.location.hostname + ':49864/');
+>>>>>>> 0fd7eb6c912dcd72cc1b005f194c89707ef54fec
   ws.onmessage = function(event) {
     var data = JSON.parse(event.data);
 

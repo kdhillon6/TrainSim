@@ -23,7 +23,8 @@ var parseTrackData =(track)=>{
 
 //call this function from sketch to create tracks
 var addTrack=(trackData)=>{
-	tracksObjects.push(new track(trackData[0],trackData[1],trackData[2],trackData[3]));
+	t1 = new track(trackData[0],trackData[1],trackData[2],trackData[3]);
+	tracksObjects.push(t1);
 }
 
-export default tracksObjects;
+export {tracksObjects};

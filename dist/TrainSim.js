@@ -69,7 +69,7 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({14:[function(require,module,exports) {
+})({11:[function(require,module,exports) {
 'use strict'
 
 exports.byteLength = byteLength
@@ -185,7 +185,7 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
-},{}],13:[function(require,module,exports) {
+},{}],12:[function(require,module,exports) {
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = nBytes * 8 - mLen - 1
@@ -271,14 +271,14 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],12:[function(require,module,exports) {
+},{}],10:[function(require,module,exports) {
 var toString = {}.toString;
 
 module.exports = Array.isArray || function (arr) {
   return toString.call(arr) == '[object Array]';
 };
 
-},{}],10:[function(require,module,exports) {
+},{}],9:[function(require,module,exports) {
 
 var global = (1,eval)("this");
 /*!
@@ -2071,7 +2071,7 @@ function isnan (val) {
   return val !== val // eslint-disable-line no-self-compare
 }
 
-},{"base64-js":14,"ieee754":13,"isarray":12,"buffer":10}],11:[function(require,module,exports) {
+},{"base64-js":11,"ieee754":12,"isarray":10,"buffer":9}],8:[function(require,module,exports) {
 
 // shim for using process in browser
 var process = module.exports = {};
@@ -2258,7 +2258,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],7:[function(require,module,exports) {
+},{}],6:[function(require,module,exports) {
 var global = (1,eval)("this");
 var Buffer = require("buffer").Buffer;
 var process = require("process");
@@ -73668,7 +73668,7 @@ module.exports = p5;
 
 },{"../core/core":55,"./p5.Geometry":102}]},{},[46])(46)
 });
-},{"buffer":10,"process":11}],9:[function(require,module,exports) {
+},{"buffer":9,"process":8}],18:[function(require,module,exports) {
 /*! p5.sound.js v0.3.5 2017-07-28 */
 /**
  *  p5.sound extends p5 with <a href="http://caniuse.com/audio-api"
@@ -84190,7 +84190,7 @@ src_app = function () {
 }(sndcore, master, helpers, errorHandler, panner, soundfile, amplitude, fft, signal, oscillator, env, pulse, noise, audioin, filter, delay, reverb, metro, looper, compressor, soundRecorder, peakdetect, gain, distortion);
 }));
 
-},{"../p5":7}],8:[function(require,module,exports) {
+},{"../p5":6}],19:[function(require,module,exports) {
 /*! p5.dom.js v0.3.4 Aug 11, 2017 */
 /**
  * <p>The web is much more than just canvas and p5.dom makes it easy to interact
@@ -86728,7 +86728,7 @@ src_app = function () {
 
 }));
 
-},{"../p5":7}],17:[function(require,module,exports) {
+},{"../p5":6}],13:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -86743,7 +86743,7 @@ const trainWidth = exports.trainWidth = 40;
 const trainOuterRadius = exports.trainOuterRadius = 3;
 const trainColor = exports.trainColor = "#023F4D";
 const trainCompartmentColor = exports.trainCompartmentColor = "white";
-},{}],19:[function(require,module,exports) {
+},{}],17:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -86762,12 +86762,13 @@ class track {
 }
 
 exports.default = track;
-},{}],20:[function(require,module,exports) {
+},{}],14:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.tracksObjects = undefined;
 
 var _track = require("./track");
 
@@ -86794,11 +86795,12 @@ var parseTrackData = track => {
 
 //call this function from sketch to create tracks
 var addTrack = trackData => {
-  tracksObjects.push(new track(trackData[0], trackData[1], trackData[2], trackData[3]));
+  t1 = new track(trackData[0], trackData[1], trackData[2], trackData[3]);
+  tracksObjects.push(t1);
 };
 
-exports.default = tracksObjects;
-},{"./track":19}],18:[function(require,module,exports) {
+exports.tracksObjects = tracksObjects;
+},{"./track":17}],15:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -86860,7 +86862,7 @@ class train {
 
 }
 exports.default = train;
-},{"../constants":17}],20:[function(require,module,exports) {
+},{"../constants":13}],16:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -86889,7 +86891,7 @@ parseTrackData = (train, i) => {
 };
 
 exports.default = createTrain;
-},{"./train":18}],6:[function(require,module,exports) {
+},{"./train":15}],4:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -86929,25 +86931,14 @@ const sketch = p5 => {
 
   // make library globally available
   window.p5 = p5;
-<<<<<<< HEAD
-
-  var track = new _createTrack.Track();
-
-  //Varibles 
-  var train = new _train2.default(1, 'W', 10, { x: _constants.width, y: 100 });
-=======
   window.Trains = [];
   window.Tracks = [];
   var train = new _train2.default(1, 'S', 5, { x: 100, y: 0 });
->>>>>>> b69eb570a9244c790090fd42c71cb900e470ccc7
 
   // Setup function
   p5.setup = () => {
     let canvas = p5.createCanvas(canvasWidth, canvasHeight);
     p5.frameRate(10);
-
-    (0, _createTrain.createTrain)();
-
     // Your stuff goes in here
   };
 
@@ -86965,11 +86956,7 @@ var createTrack = () => {
 };
 
 exports.default = sketch;
-<<<<<<< HEAD
-},{"p5":7,"p5/lib/addons/p5.sound":9,"p5/lib/addons/p5.dom":8,"./constants":17,"./components/createTrack":20,"./components/train":18}],16:[function(require,module,exports) {
-=======
-},{"p5":7,"p5/lib/addons/p5.sound":9,"p5/lib/addons/p5.dom":8,"./constants":17,"./components/track":19,"./components/train":18,"./components/createTrain":20}],16:[function(require,module,exports) {
->>>>>>> b69eb570a9244c790090fd42c71cb900e470ccc7
+},{"p5":6,"p5/lib/addons/p5.sound":18,"p5/lib/addons/p5.dom":19,"./constants":13,"./components/createTrack":14,"./components/train":15,"./components/createTrain":16}],7:[function(require,module,exports) {
 var bundleURL = null;
 function getBundleURLCached() {
   if (!bundleURL) {
@@ -87000,7 +86987,7 @@ function getBaseURL(url) {
 exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
 
-},{}],15:[function(require,module,exports) {
+},{}],5:[function(require,module,exports) {
 var bundle = require('./bundle-url');
 
 function updateLink(link) {
@@ -87032,13 +87019,13 @@ function reloadCSS() {
 
 module.exports = reloadCSS;
 
-},{"./bundle-url":16}],5:[function(require,module,exports) {
+},{"./bundle-url":7}],3:[function(require,module,exports) {
 
         var reloadCSS = require('_css_loader');
         module.hot.dispose(reloadCSS);
         module.hot.accept(reloadCSS);
       
-},{"_css_loader":15}],4:[function(require,module,exports) {
+},{"_css_loader":5}],2:[function(require,module,exports) {
 "use strict";
 
 var _p = require("p5");
@@ -87055,7 +87042,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // Initialize sketch
 new _p2.default(_sketch2.default);
-},{"p5":7,"./js/sketch":6,"./styles/main.css":5}],0:[function(require,module,exports) {
+},{"p5":6,"./js/sketch":4,"./styles/main.css":3}],0:[function(require,module,exports) {
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
 function Module() {
@@ -87073,7 +87060,7 @@ function Module() {
 module.bundle.Module = Module;
 
 if (!module.bundle.parent && typeof WebSocket !== 'undefined') {
-  var ws = new WebSocket('ws://' + window.location.hostname + ':58326/');
+  var ws = new WebSocket('ws://' + window.location.hostname + ':62346/');
   ws.onmessage = function(event) {
     var data = JSON.parse(event.data);
 
@@ -87174,4 +87161,4 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id)
   });
 }
-},{}]},{},[0,4])
+},{}]},{},[0,2])

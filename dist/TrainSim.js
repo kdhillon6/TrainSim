@@ -86776,6 +86776,29 @@ class train {
     this.id = id;
     this.direction = direction;
     this.pos = { x: track.x, y: track.y };
+
+    if (this.direction == 'E') {
+      this.leftTop = { x: this.pos.x, y: this.pos.y };
+      this.leftBottom = { x: this.pos.x, y: this.pos.y + _constants.trainWidth };
+      this.rightTop = { x: this.pos.x + _constants.trainLength, y: this.pos.y };
+      this.rightBottom = { x: this.pos.x + _constants.trainLength, y: this.pos.y + _constants.trainWidth };
+    } else if (this.direction == 'W') {
+      this.leftTop = { x: this.pos.x - _constants.trainWidth, y: this.pos.y };
+      this.leftBottom = { x: this.pos.x - _constants.trainWidth, y: this.pos.y + _constants.trainWidth };
+      this.rightTop = { x: this.pos.x, y: this.pos.y };
+      this.rightBottom = { x: this.pos.x, y: this.pos.y + _constants.trainWidth };
+    } else if (this.direction == 'N') {
+      this.leftTop = { x: this.pos.x, y: this.pos.y - _constants.trainLength };
+      this.leftBottom = { x: this.pos.x, y: this.pos.y };
+      this.rightTop = { x: this.pos.x + _constants.trainWidth, y: this.pos.y - _constants.trainLength };
+      this.rightBottom = { x: this.pos.x + _constants.trainWidth, y: this.pos.y };
+    } else if (this.direction == 'S') {
+      this.leftTop = { x: this.pos.x, y: this.pos.y };
+      this.leftBottom = { x: this.pos.x, y: this.pos.y + _constants.trainLength };
+      this.rightTop = { x: this.pos.x + _constants.trainWidth, y: this.pos.y };
+      this.rightBottom = { x: this.pos.x + _constants.trainWidth, y: this.pos.y + _constants.trainLength };
+    }
+
     this.speed = speed;
     this.track = track;
   }
@@ -86820,7 +86843,18 @@ class train {
     }
   }
 
-  update() {}
+  update(Trains) {
+
+    for (train in Trains) {
+      if (this.direction == 'E') {
+        for (train in Trains) {
+          if (train.direction == 'N' || train.direction == 'S') {
+            // if (this.pos.x )
+          }
+        }
+      } else if (this.direction == 'W') {} else if (this.direction == 'N') {} else if (this.direction == 'S') {}
+    }
+  }
 
 }
 exports.default = train;
@@ -86848,7 +86882,7 @@ function createTrain() {
   var txt = "id dir speed x y\r\n1 E 10 100 100\r\n2 N 5 100 800";
   var lines = txt.split("\n");
 
-  for (let i = 0; i < lines.length; i++) {
+  for (let i = 1; i < lines.length; i++) {
     createTrainObj(lines[i]);
   }
 }
@@ -86856,6 +86890,10 @@ function createTrain() {
 function createTrainObj(line) {
   let data = line.split(" ");
   console.log(data);
+
+  let obj = new _train2.default(parseInt(data[0]), data[1], parseInt(data[2]), { x: parseInt(data[3]), y: parseInt(data[4]) });
+  Trains.push(obj);
+  //console.log("Appended obj:" + obj.id);
 }
 },{"./train":11,"fs":20}],4:[function(require,module,exports) {
 "use strict";
@@ -86901,7 +86939,6 @@ const sketch = p5 => {
   window.p5 = p5;
   window.Trains = [];
   window.Tracks = [];
-  var train = new _train2.default(1, 'S', 5, { x: 100, y: 0 });
 
   (0, _createTrain.createTrain)();
 
@@ -86916,7 +86953,9 @@ const sketch = p5 => {
   // Draw function
   p5.draw = () => {
     p5.background('yellow');
-    train.show();
+    for (let i = 0; i < Trains.length; i++) {
+      Trains[i].show();
+    }
   };
 };
 

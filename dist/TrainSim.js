@@ -69,7 +69,7 @@ require = (function (modules, cache, entry) {
 
   // Override the current require with this new one
   return newRequire;
-})({19:[function(require,module,exports) {
+})({21:[function(require,module,exports) {
 'use strict'
 
 exports.byteLength = byteLength
@@ -271,14 +271,14 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],21:[function(require,module,exports) {
+},{}],19:[function(require,module,exports) {
 var toString = {}.toString;
 
 module.exports = Array.isArray || function (arr) {
   return toString.call(arr) == '[object Array]';
 };
 
-},{}],13:[function(require,module,exports) {
+},{}],12:[function(require,module,exports) {
 
 var global = (1,eval)("this");
 /*!
@@ -2071,7 +2071,7 @@ function isnan (val) {
   return val !== val // eslint-disable-line no-self-compare
 }
 
-},{"base64-js":19,"ieee754":20,"isarray":21,"buffer":13}],14:[function(require,module,exports) {
+},{"base64-js":21,"ieee754":20,"isarray":19,"buffer":12}],13:[function(require,module,exports) {
 
 // shim for using process in browser
 var process = module.exports = {};
@@ -73668,7 +73668,7 @@ module.exports = p5;
 
 },{"../core/core":55,"./p5.Geometry":102}]},{},[46])(46)
 });
-},{"buffer":13,"process":14}],23:[function(require,module,exports) {
+},{"buffer":12,"process":13}],22:[function(require,module,exports) {
 /*! p5.sound.js v0.3.5 2017-07-28 */
 /**
  *  p5.sound extends p5 with <a href="http://caniuse.com/audio-api"
@@ -84190,7 +84190,7 @@ src_app = function () {
 }(sndcore, master, helpers, errorHandler, panner, soundfile, amplitude, fft, signal, oscillator, env, pulse, noise, audioin, filter, delay, reverb, metro, looper, compressor, soundRecorder, peakdetect, gain, distortion);
 }));
 
-},{"../p5":10}],22:[function(require,module,exports) {
+},{"../p5":10}],23:[function(require,module,exports) {
 /*! p5.dom.js v0.3.4 Aug 11, 2017 */
 /**
  * <p>The web is much more than just canvas and p5.dom makes it easy to interact
@@ -86744,25 +86744,19 @@ const trainOuterRadius = exports.trainOuterRadius = 3;
 const trainColor = exports.trainColor = "#023F4D";
 const trainCompartmentColor = exports.trainCompartmentColor = "white";
 
-const trainDeaccelerate = exports.trainDeaccelerate = 15;
+const trainDeaccelerate = exports.trainDeaccelerate = 0.07;
+const acceleration = exports.acceleration = 0.07;
 const outerR = exports.outerR = 25;
 const innerR = exports.innerR = 80;
 
 const collisionThresold = exports.collisionThresold = 105;
-},{}],18:[function(require,module,exports) {
-module.exports="/dist/10756d2ffb1e968fcc9b703173e482d6.png";
-},{}],17:[function(require,module,exports) {
+},{}],15:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _trainTrack = require("./trainTrack.png");
-
-var _trainTrack2 = _interopRequireDefault(_trainTrack);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+//import pic from "./pic.jpg";
 
 class track {
   constructor(id, direction, x, y) {
@@ -86770,26 +86764,40 @@ class track {
     this.direction = direction;
     this.x = x;
     this.y = y;
-    this.img = p5.loadImage(_trainTrack2.default);
+    //this.img = p5.loadImage(trackImg);
   }
   show() {
-    p5.fill("black");
-    if (this.direction == "e") {
-      p5.rect(this.x, this.y, 1000, 50);
-      p5.image(this.img, this.x, this.y, 1000, 50);
-    }
 
+    if (this.direction == "e") {
+      p5.fill("black");
+      p5.noStroke();
+      p5.rect(this.x, this.y, 1000, trackSize);
+      //p5.image(this.img,this.x,this.y,1000,50);
+    }
     if (this.direction == "s") {
-      console.log("asd");
-      p5.image(this.img, this.x, this.y, 50, 8000);
-      //p5.rect(this.x,this.y,50,800);
+      p5.fill("red");
+      p5.noStroke();
+      //p5.image(this.img,this.x,this.y,50,8000);
+      p5.rect(this.x, this.y, trackSize, 800);
+    }
+    if (this.direction == "n") {
+      p5.fill("white");
+      p5.noStroke();
+      //p5.image(this.img,this.x,this.y,50,8000);
+      p5.rect(this.x, this.y, trackSize, -1000);
+    }
+    if (this.direction == "w") {
+      p5.fill("green");
+      p5.noStroke();
+      //p5.image(this.img,this.x,this.y,50,8000);
+      p5.rect(this.x, this.y, -800, trackSize);
     }
   }
 }
 exports.default = track;
-},{"./trainTrack.png":18}],11:[function(require,module,exports) {
+},{}],14:[function(require,module,exports) {
 
-},{}],7:[function(require,module,exports) {
+},{}],9:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -86809,7 +86817,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 //call this function from sketch to create tracks
 function createTrack() {
-  var txt = "1 e 0 300\r\n2 e 600 0\r\n3 w 300 1000\r\n4 w 700 1000\r\n5 n 100 100\r\n6 s 100 100";
+  var txt = "1 e 0 300\r\n2 e 600 0\r\n3 w 800 100\r\n4 w 800 700\r\n5 n 200 1000\r\n6 s 100 100";
   var tracks = txt.split("\n");
 
   //get each track
@@ -86820,7 +86828,7 @@ function createTrack() {
     Tracks.push(t1);
   }
 }
-},{"./track":17,"fs":11}],8:[function(require,module,exports) {
+},{"./track":15,"fs":14}],7:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -86834,7 +86842,8 @@ class train {
     this.id = id;
     this.direction = direction;
     this.pos = { x: track.x, y: track.y };
-
+    this.acceleration = _constants.acceleration;
+    this.move = 1;
     if (this.direction == 'W') {
       this.leftTop = { x: this.pos.x, y: this.pos.y };
       this.leftBottom = { x: this.pos.x, y: this.pos.y + _constants.trainWidth };
@@ -86935,7 +86944,19 @@ class train {
           }
         }
       }
-      if (!stop) this.pos.x += this.speed;
+      if (stop) {
+        this.move -= this.move * _constants.trainDeaccelerate;
+        if (this.move <= 0) {
+          this.move = 0;
+        }
+      } else {
+        if (this.move >= this.speed) {
+          this.move = this.speed;
+        } else {
+          this.move += this.move * _constants.acceleration;
+        }
+      }
+      this.pos.x += this.move;
     } else if (this.direction == 'W') {
       var stop = false;
       for (let i = 0; i < Trains.length; i++) {
@@ -86955,7 +86976,19 @@ class train {
           }
         }
       }
-      if (!stop) this.pos.x -= this.speed;
+      if (stop) {
+        this.move -= this.move * _constants.trainDeaccelerate;
+        if (this.move <= 0) {
+          this.move = 0;
+        }
+      } else {
+        if (this.move >= this.speed) {
+          this.move = this.speed;
+        } else {
+          this.move += this.move * _constants.acceleration;
+        }
+      }
+      this.pos.x -= this.move;
     } else if (this.direction == 'N') {
 
       var stop = false;
@@ -86976,7 +87009,19 @@ class train {
           }
         }
       }
-      if (!stop) this.pos.y -= this.speed;
+      if (stop) {
+        this.move -= this.move * _constants.trainDeaccelerate;
+        if (this.move <= 0) {
+          this.move = 0;
+        }
+      } else {
+        if (this.move >= this.speed) {
+          this.move = this.speed;
+        } else {
+          this.move += this.move * _constants.acceleration;
+        }
+      }
+      this.pos.y -= this.move;
     } else if (this.direction == 'S') {
       var stop = false;
       for (let i = 0; i < Trains.length; i++) {
@@ -86996,7 +87041,20 @@ class train {
           }
         }
       }
-      if (!stop) this.pos.y += this.speed;
+      if (stop) {
+        this.move -= this.move * _constants.trainDeaccelerate;
+        if (this.move <= 0) {
+          this.move = 0;
+        }
+      } else {
+        if (this.move >= this.speed) {
+          this.move = this.speed;
+        } else {
+          this.move += this.move * _constants.acceleration;
+        }
+      }
+
+      this.pos.y += this.move;
     }
   }
 
@@ -87037,7 +87095,7 @@ class train {
   }
 }
 exports.default = train;
-},{"../constants":6}],9:[function(require,module,exports) {
+},{"../constants":6}],8:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -87056,7 +87114,7 @@ var _fs2 = _interopRequireDefault(_fs);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function createTrain() {
-  var txt = "id dir speed x y\r\n1 E 10 100 100\r\n2 N 5 100 800";
+  var txt = "id dir speed x y\r\n1 E 1 400 100\r\n6 E 5 100 100\r\n2 N 3 100 150\r\n3 N 3 300 700\r\n4 E 2 10 300\r\n5 S 3.6 340 0";
   var lines = txt.split("\n");
 
   for (let i = 1; i < lines.length; i++) {
@@ -87072,7 +87130,7 @@ function createTrainObj(line) {
   Trains.push(obj);
   //console.log("Appended obj:" + obj.id);
 }
-},{"./train":8,"fs":11}],3:[function(require,module,exports) {
+},{"./train":7,"fs":14}],4:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -87111,7 +87169,7 @@ const sketch = p5 => {
   // Variables scoped within p5
   const canvasWidth = constants.width;
   const canvasHeight = constants.height;
-
+  window.trackSize = 50;
   // make library globally available
   window.p5 = p5;
   window.Trains = [];
@@ -87121,7 +87179,8 @@ const sketch = p5 => {
   // Setup function
   p5.setup = () => {
     let canvas = p5.createCanvas(canvasWidth, canvasHeight);
-    p5.frameRate(10);
+    canvas.parent('canvas');
+    //p5.frameRate(10);
     // Your stuff goes in here
   };
 
@@ -87141,7 +87200,7 @@ const sketch = p5 => {
 };
 
 exports.default = sketch;
-},{"p5":10,"p5/lib/addons/p5.sound":23,"p5/lib/addons/p5.dom":22,"./constants":6,"./components/createTrack":7,"./components/train":8,"./components/createTrain":9}],12:[function(require,module,exports) {
+},{"p5":10,"p5/lib/addons/p5.sound":22,"p5/lib/addons/p5.dom":23,"./constants":6,"./components/createTrack":9,"./components/train":7,"./components/createTrain":8}],11:[function(require,module,exports) {
 var bundleURL = null;
 function getBundleURLCached() {
   if (!bundleURL) {
@@ -87204,7 +87263,7 @@ function reloadCSS() {
 
 module.exports = reloadCSS;
 
-},{"./bundle-url":12}],4:[function(require,module,exports) {
+},{"./bundle-url":11}],3:[function(require,module,exports) {
 
         var reloadCSS = require('_css_loader');
         module.hot.dispose(reloadCSS);
@@ -87227,7 +87286,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // Initialize sketch
 new _p2.default(_sketch2.default);
-},{"p5":10,"./js/sketch":3,"./styles/main.css":4}],0:[function(require,module,exports) {
+},{"p5":10,"./js/sketch":4,"./styles/main.css":3}],0:[function(require,module,exports) {
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
 function Module() {
@@ -87245,7 +87304,7 @@ function Module() {
 module.bundle.Module = Module;
 
 if (!module.bundle.parent && typeof WebSocket !== 'undefined') {
-  var ws = new WebSocket('ws://' + window.location.hostname + ':56920/');
+  var ws = new WebSocket('ws://' + window.location.hostname + ':62679/');
   ws.onmessage = function(event) {
     var data = JSON.parse(event.data);
 
